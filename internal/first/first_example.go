@@ -15,7 +15,8 @@ func sayHello() {
 	fmt.Println(version.VERSION)
 }
 
-/**
+/*
+*
 Person 类实例使用
 */
 type Person struct {
