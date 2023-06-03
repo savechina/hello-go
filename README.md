@@ -1,6 +1,6 @@
 Hello-Go
 
-Learn go example
+Learn Go Example
 
 Overview
 

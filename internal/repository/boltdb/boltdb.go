@@ -7,7 +7,7 @@ import (
 	"go.etcd.io/bbolt"
 )
 
-func Bolt_test() {
+func Bolt_demo() {
 	// 打开数据库文件，如果不存在则创建
 	db, err := bbolt.Open("data/hello.db", 0666, nil)
 	if err != nil {

@@ -2,3 +2,4 @@
 bin/hello-go
 
 data/hello.db
+data/foo.db
