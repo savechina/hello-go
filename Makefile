@@ -7,7 +7,7 @@ GOBASE=$(shell pwd)
 # GOPATH="$(GOBASE)/vendor:$(GOBASE)"
 GOPATH="$(GOBASE)"
 GOBIN=$(GOBASE)/bin
-GOFILES=$(wildcard cmd/*/*.go)
+GOFILES=$(wildcard cmd/hello/*.go)
 
 GOGETS=go.etcd.io/bbolt
 

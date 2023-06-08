@@ -50,12 +50,17 @@ func Sqlite3_orm_demo() {
 	fmt.Println("userRepo FindUsers:", u)
 }
 
-func (userRepo *UserRepo) FindUsers(map[string]interface{}) (*domain.User, error) {
+// FindUsers
+func (userRepo *UserRepo) FindUsers(condition map[string]interface{}) (*domain.User, error) {
 	var user domain.User
 
 	userRepo.db.First(&user)
 
 	return &user, nil
+}
+
+func (userRepo *UserRepo) CreateUser(user *domain.User) {
+	userRepo.db.Create(&user)
 }
 
 // init db conection

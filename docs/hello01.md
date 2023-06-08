@@ -1,11 +1,28 @@
-开始指南（get startd guide）
+开始指南（getstartd guide）
 
-工程目录结构：
+## Install
 
-参考：https://github.com/golang-standards/project-layout
+1. 下载源代码
+
+`git clone git@github.com:savechina/hello-go.git`
+
+
+2. 编译构建
+`make clean compile`
+
+3. 输出：
+```
+➜  hello-go git:(master) ✗ bin/hello-go
+1.0.0
+hello world!
+```
+
+## 工程目录结构：
+
+参考：[Project Structure](https://github.com/golang-standards/project-layout)
 
 ```bash
-hello-go git:(master) ✗ ls
+hello-go git:(master) ✗ tree
 ├── Makefile
 ├── README.md
 ├── bin
@@ -30,3 +47,4 @@ hello-go git:(master) ✗ ls
 ├── test
 └── tools
 ```
+
