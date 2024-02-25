@@ -64,6 +64,9 @@ compile:
 exec:
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) $(run)
 
+## test: Test all files. Runs `go test` internally.
+test: go-test
+
 ## clean: Clean build files. Runs `go clean` internally.
 clean:
 	@$(MAKE) go-clean
@@ -72,8 +75,15 @@ go-compile: go-clean go-get go-build
 
 go-build:
 	@echo "  >  Building binary..."
-	# @GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
-	@GOBIN=$(GOBIN) go build -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) 
+	go build -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
+	# @GOBIN=$(GOBIN) go build -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
+
+# 定义测试目标
+go-test:
+	@echo "  >  Test all..."
+	@GOPATH=$(GOPATH) 
+	go test "./..."
 
 go-generate:
 	@echo "  >  Generating dependency files..."
@@ -93,7 +103,7 @@ go-clean:
 	@GOPATH=$(GOPATH)
 	GOBIN=$(GOBIN)
 	go clean
-	@-rm $(GOBIN)/*
+	@-rm -f $(GOBIN)/*
 
 .PHONY: help
 all: help

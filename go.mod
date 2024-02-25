@@ -7,7 +7,7 @@ require (
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/pflag v1.0.5 // indirect
 	// github.com/spf13/viper v1.16.0
-	go.etcd.io/bbolt v1.3.7
+	go.etcd.io/bbolt v1.3.8
 	gorm.io/driver/sqlite v1.5.1
 	gorm.io/gorm v1.25.1
 )

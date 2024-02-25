@@ -10,6 +10,22 @@
 2. 编译构建
 `make clean compile`
 
+Make 全部任务
+```zsh
+➜  hello-go git:(master) make
+
+ Choose a command run in hello-go:
+
+  install   Install missing dependencies. Runs `go get` internally. e.g; make install get=github.com/foo/bar
+  start     Start in development mode. Auto-starts when code changes.
+  stop      Stop development mode.
+  watch     Run given command when code changes. e.g; make watch run="echo 'hey'"
+  build     Build the binary
+  compile   Compile the binary.
+  exec      Run given command, wrapped with custom GOPATH. e.g; make exec run="go test ./..."
+  clean     Clean build files. Runs `go clean` internally.
+```
+
 3. 输出：
 ```
 ➜  hello-go git:(master) ✗ bin/hello-go
