@@ -1,4 +1,4 @@
-开始指南（getstartd guide）
+# Getting Started
 
 ## Install
 
@@ -6,13 +6,12 @@
 
 `git clone git@github.com:savechina/hello-go.git`
 
-
 2. 编译构建
 `make clean compile`
 
 Make 全部任务
 ```zsh
-➜  hello-go git:(master) make
+➜  hello-go git:(main) make
 
  Choose a command run in hello-go:
 
@@ -63,4 +62,3 @@ hello-go git:(master) ✗ tree
 ├── test
 └── tools
 ```
-

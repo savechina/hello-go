@@ -5,4 +5,4 @@ Learn Go Example
 Overview
 
 
-[quickstart guide](docs/hello01.md)
+[quickstart guide](docs/src/getting-started.md)
