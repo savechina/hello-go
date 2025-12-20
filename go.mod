@@ -1,6 +1,6 @@
 module hello
 
-go 1.23
+go 1.24
 
 toolchain go1.24.3
 
@@ -9,7 +9,7 @@ require (
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/pflag v1.0.6 // indirect
 	// github.com/spf13/viper v1.16.0
-	go.etcd.io/bbolt v1.4.2
+	go.etcd.io/bbolt v1.4.3
 	gorm.io/driver/sqlite v1.5.1
 	gorm.io/gorm v1.25.1
 )

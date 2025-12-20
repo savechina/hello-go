@@ -1,115 +1,78 @@
-# include .env
+# 引入环境变量
+-include .env
 
-PROJECTNAME=$(shell basename "$(PWD)")
+# 项目基础变量
+PROJECTNAME := $(shell basename "$(PWD)")
+GOBASE      := $(shell pwd)
+GOBIN       := $(GOBASE)/bin
+GOFILES     := $(wildcard cmd/*/*.go)
 
-# Go related variables.
-GOBASE=$(shell pwd)
-# GOPATH="$(GOBASE)/vendor:$(GOBASE)"
-GOPATH="$(GOBASE)"
-GOBIN=$(GOBASE)/bin
-GOFILES=$(wildcard cmd/hello/*.go)
+# 获取 cmd 目录下所有的子目录名，作为构建目标
+COMMANDS    := $(notdir $(patsubst %/,%,$(wildcard cmd/*/)))
 
-GOGETS=go.etcd.io/bbolt
+# 编译输出重定向
+STDERR      := /tmp/.$(PROJECTNAME)-stderr.txt
+PID         := /tmp/.$(PROJECTNAME).pid
 
-# Redirect error output to a file, so we can show it in development mode.
-STDERR=/tmp/.$(PROJECTNAME)-stderr.txt
-
-# PID file will keep the process id of the server
-PID=/tmp/.$(PROJECTNAME).pid
-
-# Make is verbose in Linux. Make it silent.
+# 让 Make 输出更简洁
 MAKEFLAGS += --silent
 
+.PHONY: all build compile clean install test watch start stop help
+
 default: help
-.DEFAULT_GOAL: help
 
+## install: 安装并同步依赖 (go mod tidy)
+install:
+	@echo "  >  Syncing dependencies..."
+	go mod tidy
+	go mod download
 
-## install: Install missing dependencies. Runs `go get` internally. e.g; make install get=github.com/foo/bar
-install: go-get
+## build: 编译所有 cmd 下的二进制文件
+build: clean $(COMMANDS)
 
-## start: Start in development mode. Auto-starts when code changes.
+# 动态匹配 cmd/ 下的目录进行编译
+$(COMMANDS):
+	@echo "  >  Building binary: $@"
+	GOBIN=$(GOBIN) go build -o $(GOBIN)/$@ ./cmd/$@
+
+## compile: 快捷编译（默认编译主程序）
+compile: build
+
+## start: 开发模式：自动监控并重启
 start:
-	bash -c "trap 'make stop' EXIT; $(MAKE) compile start-server watch run='make compile start-server'"
-
-## stop: Stop development mode.
-stop: stop-server
+	@bash -c "trap 'make stop' EXIT; $(MAKE) watch run='make compile start-server'"
 
 start-server: stop-server
-	@echo "  >  $(PROJECTNAME) is available at $(ADDR)"
-	@-$(GOBIN)/$(PROJECTNAME) 2>&1 & echo $$! > $(PID)
-	@cat $(PID) | sed "/^/s/^/  \>  PID: /"
+	@echo "  >  $(PROJECTNAME) is starting..."
+	@$(GOBIN)/$(PROJECTNAME) 2>$(STDERR) & echo $$! > $(PID)
+	@echo "  >  PID: $$(cat $(PID))"
 
 stop-server:
 	@-touch $(PID)
 	@-kill `cat $(PID)` 2> /dev/null || true
 	@-rm $(PID)
 
-## watch: Run given command when code changes. e.g; make watch run="echo 'hey'"
+## watch: 使用 yolo 或内建逻辑监控文件变化
 watch:
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) yolo -i . -e vendor -e bin -c "$(run)"
+	@echo "  >  Watching files in $(GOBASE)..."
+	@yolo -i . -e vendor -e bin -c "$(run)"
 
-restart-server: stop-server start-server
+## test: 运行单元测试
+test:
+	@echo "  >  Running tests..."
+	go test -v ./...
 
-## build: Build the binary
-build: compile
-
-## compile: Compile the binary.
-compile:
-	@-touch $(STDERR)
-	@-rm $(STDERR)
-	@-$(MAKE) -s go-compile 2> $(STDERR)
-	@cat $(STDERR) | sed -e '1s/.*/\nError:\n/'  | sed 's/make\[.*/ /' | sed "/^/s/^/     /" 1>&2
-
-## exec: Run given command, wrapped with custom GOPATH. e.g; make exec run="go test ./..."
-exec:
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) $(run)
-
-## test: Test all files. Runs `go test` internally.
-test: go-test
-
-## clean: Clean build files. Runs `go clean` internally.
+## clean: 清理二进制文件和缓存
 clean:
-	@$(MAKE) go-clean
-
-go-compile: go-clean go-get go-build
-
-go-build:
-	@echo "  >  Building binary..."
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) 
-	go build -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
-	# @GOBIN=$(GOBIN) go build -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
-
-# 定义测试目标
-go-test:
-	@echo "  >  Test all..."
-	@GOPATH=$(GOPATH) 
-	go test "./..."
-
-go-generate:
-	@echo "  >  Generating dependency files..."
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go generate $(generate)
-
-go-get:
-	@echo "  >  Checking if there is any missing dependencies..."
-	@GOBIN=$(GOBIN)
-	go get $(GOGETS)
-
-go-install:
-	echo $(GOFILES)
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go install $(GOFILES)
-
-go-clean:
-	echo "  >  Cleaning build cache" 
-	@GOPATH=$(GOPATH)
-	GOBIN=$(GOBIN)
+	@echo "  >  Cleaning build cache and binaries..."
 	go clean
-	@-rm -f $(GOBIN)/*
+	rm -rf $(GOBIN)
+	rm -f $(STDERR)
 
-.PHONY: help
-all: help
+## help: 显示所有命令
 help: Makefile
 	@echo
-	@echo " Choose a command run in "$(PROJECTNAME)":"
+	@echo " Choose a command to run in $(PROJECTNAME):"
 	@echo
 	@sed -n 's/^##//p' $< | column -t -s ':' |  sed -e 's/^/ /'
 	@echo
