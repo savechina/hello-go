@@ -25,7 +25,9 @@ func Sqlite3_orm_demo() {
 	}
 
 	// Create a table for users.
-	db.AutoMigrate(&user)
+	if err := db.AutoMigrate(&user); err != nil {
+		log.Fatal(err)
+	}
 
 	db.Create(&user)
 

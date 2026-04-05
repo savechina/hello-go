@@ -1,3 +1,5 @@
 package version
 
-const VERSION = "1.0.0"
+var VERSION = "dev"
+var COMMIT = "unknown"
+var BUILD_TIME = "unknown"
