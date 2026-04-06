@@ -34,7 +34,7 @@ BINARY ?= hello
 # 让 Make 输出更简洁
 MAKEFLAGS += --silent
 
-.PHONY: all build compile clean install test watch start stop help fmt vet lint release cross doc run verify
+.PHONY: all build compile clean install test watch start stop help fmt vet lint release cross doc run verify $(COMMANDS)
 
 default: help
 

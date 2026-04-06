@@ -1,5 +1,7 @@
+# Build outputs
+bin/
+build/
 
-bin/hello-go
-
+# Data files
 data/hello.db
 data/foo.db
