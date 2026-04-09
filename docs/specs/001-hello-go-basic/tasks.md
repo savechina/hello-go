@@ -144,15 +144,15 @@
 
 ### Implementation for User Story 3
 
-- [ ] T072 [US3] Create `internal/awesome/webservice/` — Web 服务项目: main.go, handler.go, router.go with RESTful API
-- [ ] T073 [US3] Create `docs/src/awesome/webservice.md` — 项目文档 (architecture, setup, run instructions)
-- [ ] T074 [US3] Create `internal/awesome/webservice/main_test.go`
-- [ ] T075 [US3] Create `internal/awesome/clidemo/` — CLI 工具项目: Cobra-based CLI with subcommands
-- [ ] T076 [US3] Create `docs/src/awesome/clidemo.md`
-- [ ] T077 [US3] Create `internal/awesome/clidemo/main_test.go`
-- [ ] T078 [US3] Create `internal/awesome/datapipeline/` — 数据处理管道: worker pool, channels, graceful shutdown
-- [ ] T079 [US3] Create `docs/src/awesome/datapipeline.md`
-- [ ] T080 [US3] Create `internal/awesome/datapipeline/main_test.go`
+- [X] T072 [US3] Create `internal/awesome/webservice/` — Web 服务项目: main.go, handler.go, router.go with RESTful API
+- [X] T073 [US3] Create `docs/src/awesome/webservice.md` — 项目文档 (architecture, setup, run instructions)
+- [X] T074 [US3] Create `internal/awesome/webservice/main_test.go`
+- [X] T075 [US3] Create `internal/awesome/clidemo/` — CLI 工具项目: Cobra-based CLI with subcommands
+- [X] T076 [US3] Create `docs/src/awesome/clidemo.md`
+- [X] T077 [US3] Create `internal/awesome/clidemo/main_test.go`
+- [X] T078 [US3] Create `internal/awesome/datapipeline/` — 数据处理管道: worker pool, channels, graceful shutdown
+- [X] T079 [US3] Create `docs/src/awesome/datapipeline.md`
+- [X] T080 [US3] Create `internal/awesome/datapipeline/main_test.go`
 
 **Checkpoint**: All 3 awesome projects implemented and runnable. Each has README with architecture diagram and run instructions.
 

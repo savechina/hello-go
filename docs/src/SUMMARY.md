@@ -38,9 +38,9 @@
 # 实战精选 (Awesome)
 
 - [实战精选](./awesome/awesome-overview.md)
-  - [CLI 工具](./awesome/cli.md)
-  - [Web 服务](./awesome/web.md)
-  - [数据处理](./awesome/data.md)
+  - [Web 服务](./awesome/webservice.md)
+  - [CLI 工具](./awesome/clidemo.md)
+  - [数据处理管道](./awesome/datapipeline.md)
   - [工具链实践](./awesome/tooling.md)
 
 # 算法与练习
