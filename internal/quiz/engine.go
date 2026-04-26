@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"slices"
 	"sort"
 	"strings"
 	"time"
@@ -32,9 +33,9 @@ func formatOptions(q Question) string {
 	var sb strings.Builder
 	for i, opt := range q.Options {
 		if i < len(optionLabels) {
-			sb.WriteString(fmt.Sprintf("  %s) %s\n", optionLabels[i], opt))
+			fmt.Fprintf(&sb, "  %s) %s\n", optionLabels[i], opt)
 		} else {
-			sb.WriteString(fmt.Sprintf("  %d) %s\n", i+1, opt))
+			fmt.Fprintf(&sb, "  %d) %s\n", i+1, opt)
 		}
 	}
 	return strings.TrimSuffix(sb.String(), "\n")
@@ -148,12 +149,7 @@ func runQuizWithReader(questions []Question, chapterName string, reader *bufio.R
 
 func hasSuggestion(suggestions []string, chapter string) bool {
 	target := fmt.Sprintf("建议重新阅读：%s", chapter)
-	for _, s := range suggestions {
-		if s == target {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(suggestions, target)
 }
 
 // RunSummaryMode runs quiz across multiple chapters and returns per-chapter breakdown.
