@@ -105,15 +105,48 @@ func Run() {
 
 ---
 
-## Decision 6: 数据库示例处理
+## Decision 7: Overview 文档结构模板
 
-**Decision**: SQLite 使用内存模式或临时文件，无需外部服务
+**Decision**: Basic/Advance 统一模板，Awesome 独立结构
 
 **Rationale**:
-- go-sqlite3 支持 `:memory:` 模式，零配置
-- 项目已有 SQLite 示例（`internal/repository/sqlite/`）
-- 无需 Docker 或外部数据库服务
+- Basic 和 Advance 都是学习章节导览页，内容类型一致（学习目标 + 章节导航 + 学习路径 + 下一步），统一模板保持一致性。
+- Awesome 是项目实战导览页，内容类型不同（项目介绍 + 技术栈 + 应用场景），独立结构更合理。
+
+**模板结构 (Basic/Advance)**:
+```markdown
+# [标题]
+  
+## 概述 (1-2 段)
+## 学习目标清单 (具体可验证的能力描述)
+## 章节导航 (每章 1-2 句摘要 + 🔵🟡🔴 难度标记)
+## 学习路径建议 (总时长 + 学习策略)
+## 下一步 (导航到下一模块)
+```
+
+**模板结构 (Awesome)**:
+```markdown
+# [标题]
+
+## 概述 (1-2 段)
+## 实战项目导航 (4 项目 × 名称+技术栈+适合人群/能力点+1-2 句摘要)
+## 应用场景建议
+## 前置要求
+```
 
 **Alternatives considered**:
-- PostgreSQL/MySQL — 需要外部服务，增加复杂度
-- Docker compose — 违背"纯 go run 启动"原则
+- 统一三个页面结构 — 不适合 Awesome 的项目特性
+
+---
+
+## Decision 8: Advance 前置知识自检清单实现
+
+**Decision**: 3-5 道自检题目，使用 `<details>/<summary>` HTML 折叠
+
+**Rationale**: 类似 `advance/context.md` 的 "本章适合谁" 模式，可折叠节省页面空间。
+
+---
+
+## No NEEDS CLARIFICATION items remain.
+
+All unknowns were resolved during the `/speckit.clarify` session (9 questions answered).

@@ -76,6 +76,8 @@ make start      # watch + auto-restart dev mode (requires yolo)
 ## Active Technologies
 - Go 1.24 (toolchain go1.24.3) + Cobra (CLI), GORM (ORM), go-sqlite3 (SQLite), bbolt (BoltDB), testify (testing) (001-hello-go-basic)
 - SQLite (go-sqlite3, CGO), BoltDB (bbolt) — 仅用于示例演示 (001-hello-go-basic)
+- Go 1.24 (toolchain go1.24.3) — 仅文档编写，无代码变更 + mdBook 0.4.52（文档构建）、现有 chapter Markdown 文件（内容来源） (001-hello-go-basic)
+- N/A — 纯文档项目 (001-hello-go-basic)
 
 ## Recent Changes
 - 001-hello-go-basic: Added Go 1.24 (toolchain go1.24.3) + Cobra (CLI), GORM (ORM), go-sqlite3 (SQLite), bbolt (BoltDB), testify (testing)

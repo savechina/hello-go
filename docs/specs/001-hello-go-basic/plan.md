@@ -1,58 +1,61 @@
-# Implementation Plan: Go 编程语言学习样例结构
+# Implementation Plan: 完善三个 Overview 文档（basic / advance / awesome）
 
-**Branch**: `001-hello-go-basic` | **Date**: 2026-04-05 | **Spec**: [spec.md](./spec.md)
+**Branch**: `001-hello-go-basic` | **Date**: 2026-04-26 | **Spec**: [spec.md](./spec.md)
 **Input**: Feature specification from `/docs/specs/001-hello-go-basic/spec.md`
 
 ## Summary
 
-参考 hello-rust 的 basic/advance/awesome 三级分层结构，在 hello-go 中构建 Go 编程语言学习样例。使用单一 `go.mod`，所有示例代码作为 `internal/` 下的子包，由 `cmd/hello` 统一入口通过子命令调用。配套 mdBook 中文文档，覆盖基础语法、高级特性、实战项目、算法练习、LeetCode 题解、速查表和知识检查题库。
+为 `docs/src/basic/basic-overview.md`、`docs/src/advance/advance-overview.md`、`docs/src/awesome/awesome-overview.md` 三个目前仅剩标题的页面补充完整内容。basic/advance 使用统一模板（学习目标 + 章节导航 + 学习路径建议 + 下一步导航），awesome 使用独立结构（项目导航 + 技术栈标签 + 应用场景）。全部为纯 mdBook 文档编写，不涉及代码改动。
 
 ## Technical Context
 
-**Language/Version**: Go 1.24 (toolchain go1.24.3)  
-**Primary Dependencies**: Cobra (CLI), GORM (ORM), go-sqlite3 (SQLite), bbolt (BoltDB), testify (testing)  
-**Storage**: SQLite (go-sqlite3, CGO), BoltDB (bbolt) — 仅用于示例演示  
-**Testing**: `go test` with table-driven tests, `go test -cover` (>80%), `go test -bench`  
-**Target Platform**: macOS / Linux, Go 1.24+  
-**Project Type**: CLI tool + learning documentation (mdBook)  
-**Performance Goals**: CLI startup <50ms, mdBook build <5min, binary size <20MB  
-**Constraints**: 单一 `go.mod`，所有章节共享依赖；`internal/` 包不可被外部 import；CGO required for go-sqlite3  
-**Scale/Scope**: 12+ basic chapters, 8+ advance chapters, 3+ awesome projects, 5+ algo, 5+ leetcode, 4+ projects
+**Language/Version**: Go 1.24 (toolchain go1.24.3) — 仅文档编写，无代码变更  
+**Primary Dependencies**: mdBook 0.4.52（文档构建）、现有 chapter Markdown 文件（内容来源）  
+**Storage**: N/A — 纯文档项目  
+**Testing**: mdBook build 验证（零 404、零构建错误）  
+**Target Platform**: GitHub Pages 静态站点（浏览器访问）  
+**Project Type**: documentation-only  
+**Performance Goals**: mdBook 完整构建 <5 分钟（SC-005）  
+**Constraints**: 中文编写，技术术语保留英文括号标注；字数限制 ~800 字（basic/advance）、~600 字（awesome）  
+**Scale/Scope**: 3 个 Markdown 文件，约 2200 字总内容
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-### Principle I: Code Quality ✅
-- Go 1.24 idioms, `gofmt`/`go vet`/`golangci-lint` quality gates
-- All exported identifiers documented with `//` comments
-- No `panic()` in library code (only in `main` demo entry points)
-- All code examples compile with `go build ./...`
+### Principle I. Code Quality (N/A for docs-only)
+- 无代码改动，不涉及编译器错误、lint 等。✅ 不适用
 
-### Principle II: Test-First Development ✅
-- Table-driven tests for all exported functions
-- >80% coverage target via `go test -cover`
-- Each chapter example has corresponding test file
+### Principle II. Test-First (adapted for docs)
+- 文档"测试" = mdBook build 验证 + 链接检查
+- 每个 overview 的内容需通过 `mdbook build` 验证 ✅ 将在实施阶段执行
 
-### Principle III: User Experience Consistency ✅
-- CLI via Cobra with consistent `--help` output
-- Chinese documentation with English technical terms in parentheses
-- mdBook build passes with zero errors/warnings
-- Each chapter: ≥500 Chinese chars, ≥3 code examples, ≥3 quiz questions
+### Principle III. User Experience Consistency ✅
+- 中文主要语言 + 英文技术术语括号标注 — 符合 FR-003
+- 章节结构遵循 12-section 模板 — overview 为导览页，独立结构
+- 所有链接必须有效 — 将在 build 阶段验证
 
-### Principle IV: Performance Requirements ✅
-- CLI startup <50ms cold start
-- No `time.Sleep()` in polling loops
-- Memory <100MB for demo applications
-- Binary <20MB with `-ldflags="-s -w"`
+### Principle IV. Performance Requirements (docs) ✅
+- mdbook build 时间 < 5 分钟 — 本次仅 3 个文件，预计 < 30 秒
+- 无性能影响
 
-### Principle V: SDD Harness Engineering ✅
-- Spec created via `/speckit.specify` ✅
-- Plan created via `/speckit.plan` ✅
-- Constitution check passed (all 5 principles) ✅
-- Manual commit/push only — no automatic commits
+### Principle V. SDD Harness Engineering ✅
+- 本命令为 Phase 1（Planning），后续需经 `/speckit.tasks` → `/speckit.implement`
+- Constitution Check 通过，无违规
 
-**All gates passed. Proceeding to Phase 0.**
+**Gate Result**: PASS — 所有适用原则无违规
+
+## Constitution Check (Post-Design Re-evaluation)
+
+### Re-check after Phase 1 design:
+
+- **Principle I (Code Quality)**: 仍不适用 — 无代码改动 ✅
+- **Principle II (Test-First)**: 文档测试 = mdBook build ✓ 计划在实施阶段执行 ✅
+- **Principle III (UX Consistency)**: 中文+英文术语、字数限制、结构模板均已明确 ✅
+- **Principle IV (Performance)**: mdBook build <5 min，3 个文件预计 <30s ✅
+- **Principle V (SDD)**: plan → tasks → implement 流程正确 ✅
+
+**Re-evaluation Result**: PASS — 无新增违规，所有 gates 通过
 
 ## Project Structure
 
@@ -62,75 +65,27 @@
 docs/specs/001-hello-go-basic/
 ├── plan.md              # This file
 ├── research.md          # Phase 0 output
-├── data-model.md        # Phase 1 output
+├── data-model.md        # Phase 1 output (entity mapping for docs)
 ├── quickstart.md        # Phase 1 output
-├── contracts/           # Phase 1 output (CLI command schema)
+├── contracts/           # Phase 1 output (N/A for docs-only)
 └── tasks.md             # Phase 2 output (NOT created by /speckit.plan)
 ```
 
 ### Source Code (repository root)
 
 ```text
-hello-go/
-├── cmd/
-│   ├── hello/              # 主应用，统一入口
-│   │   └── main.go         # Cobra root + 子命令路由到各章节
-│   └── foo/                # 已有 Cobra CLI
-│       └── main.go
-├── internal/
-│   ├── basic/              # 基础入门章节
-│   │   ├── variables/      // package variables → func Run()
-│   │   ├── expressions/    // package expressions → func Run()
-│   │   ├── datatype/       // package datatype → func Run()
-│   │   ├── functions/      // package functions → func Run()
-│   │   ├── structs/        // package structs → func Run()
-│   │   ├── interfaces/     // package interfaces → func Run()
-│   │   ├── generics/       // package generics → func Run()
-│   │   ├── concurrency/    // package concurrency → func Run()
-│   │   └── ...             # (≥12 chapters total)
-│   ├── advance/            # 高级进阶章节
-│   │   ├── errorhandling/  // package errorhandling → func Run()
-│   │   ├── reflection/     // package reflection → func Run()
-│   │   ├── database/       // package database → func Run()
-│   │   ├── web/            // package web → func Run()
-│   │   ├── testing/        // package testing → func Run()
-│   │   └── ...             # (≥8 chapters total)
-│   ├── awesome/            # 精选实战
-│   │   ├── webservice/     // package webservice → func Run()
-│   │   ├── clidemo/        // package clidemo → func Run()
-│   │   └── datapipeline/   // package datapipeline → func Run()
-│   ├── domain/             # [已有] Domain models
-│   ├── repository/         # [已有] SQLite/BoltDB repositories
-│   └── business/           # [已有] Business logic interfaces
-├── docs/                   # mdBook 文档
-│   ├── src/
-│   │   ├── basic/          # 基础章节文档
-│   │   ├── advance/        # 高级章节文档
-│   │   ├── awesome/        # 实战项目文档
-│   │   ├── algo/           # 算法实现文档
-│   │   ├── leetcode/       # LeetCode 题解文档
-│   │   ├── quick_reference/# 代码片段速查
-│   │   ├── quiz/           # 知识检查题库
-│   │   ├── projects/       # 项目实战文档
-│   │   ├── glossary.md     # 术语表
-│   │   ├── faq.md          # 常见问题
-│   │   └── SUMMARY.md      # 目录
-│   └── book.toml
-├── configs/                # [已有] Config helpers
-├── examples/               # (可选) 独立运行示例
-├── data/                   # [已有] Runtime data files
-├── go.mod                  # 单一 module: hello
-├── go.sum
-├── Makefile                # [已有] Build system
-└── AGENTS.md               # [已有] Project knowledge base
+docs/src/
+├── basic/
+│   └── basic-overview.md         # 待完善：~800字
+├── advance/
+│   └── advance-overview.md       # 待完善：~800字
+├── awesome/
+│   └── awesome-overview.md       # 待完善：~600字
+└── SUMMARY.md                    # 导航结构（无需改动）
 ```
 
-**Structure Decision**: 单一 `go.mod` 方案。`internal/basic/`, `internal/advance/`, `internal/awesome/` 各章节为独立子包，每个包暴露 `func Run()` 入口函数。`cmd/hello/main.go` 作为统一入口，通过子命令路由到对应章节的 `Run()` 函数。文档通过 mdBook 构建，与 hello-rust 保持一致。
+**Structure Decision**: 纯文档编写任务，仅修改 `docs/src/basic/basic-overview.md`、`docs/src/advance/advance-overview.md`、`docs/src/awesome/awesome-overview.md` 三个文件。不涉及源代码、测试或构建配置变更。
 
 ## Complexity Tracking
 
-> **Fill ONLY if Constitution Check has violations that must be justified**
-
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| N/A | All constitution principles pass | — |
+> No constitution violations. No complexity entries needed.

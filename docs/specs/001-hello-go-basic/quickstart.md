@@ -88,3 +88,36 @@ hello-go/
 1. **初学者**: 从 `basic/variables` 开始，按顺序学习每个章节
 2. **进阶者**: 直接跳转到 `advance/` 对应主题
 3. **实战**: 完成基础+高级后，参考 `awesome/` 项目
+
+---
+
+## Quickstart: 完善三个 Overview 文档（2026-04-26 added）
+
+### 需要修改的文件
+
+| 文件 | 目标字数 | 结构 |
+|------|----------|------|
+| `docs/src/basic/basic-overview.md` | ~800 字 | 统一模板 |
+| `docs/src/advance/advance-overview.md` | ~800 字 | 统一模板 |
+| `docs/src/awesome/awesome-overview.md` | ~600 字 | 独立结构 |
+
+### 验证步骤
+
+```bash
+# 1. 构建文档，确认零错误
+cd docs && mdbook build
+
+# 2. 本地预览
+mdbook serve docs/
+# 浏览器打开 http://localhost:3000
+```
+
+### 内容核对清单
+
+- [ ] basic-overview: 12 个子章节导航（1-2 句/章 + 🔵🟡🔴 难度标记）
+- [ ] basic-overview: 具体可验证的学习目标清单
+- [ ] basic-overview: 学习路径建议 + 下一步导航
+- [ ] advance-overview: 前置知识自检清单（3-5 题）
+- [ ] advance-overview: 8 个子章节导航 + 下一步导航
+- [ ] awesome-overview: 4 个项目导航（名称 + 技术栈 + 适合人群 + 摘要）
+- [ ] mdbook build 零错误、零 404

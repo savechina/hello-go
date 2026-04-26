@@ -59,3 +59,18 @@ Level 1───N Chapter 1───N Example
 3. 每个章节的代码示例 MUST 通过 `go build` 编译
 4. 每个章节的 Quiz MUST 有 ≥3 道题目
 5. 所有文档 MUST 使用中文编写
+
+---
+
+## Overview-Specific Entities (added 2026-04-26)
+
+### OverviewPage
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `File` | string | 文件路径，如 `docs/src/basic/basic-overview.md` |
+| `Level` | string | `basic` / `advance` / `awesome` |
+| `WordCountTarget` | int | 800 (basic/advance), 600 (awesome) |
+| `Structure` | string | `unified` (basic/advance), `independent` (awesome) |
+
+For validation rules specific to overview pages, see `FR-017` / `FR-018` / `FR-019` in spec.md.
