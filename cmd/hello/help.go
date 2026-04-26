@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"hello/internal/chapters"
@@ -22,6 +24,9 @@ func configureHelp(rootCmd *cobra.Command) {
 
 func renderHelp(cmd *cobra.Command) string {
 	if level := cmd.Annotations["level"]; level != "" {
+		if level == "quiz" {
+			return renderQuizLevelHelp(cmd)
+		}
 		return renderLevelHelp(cmd, level)
 	}
 
@@ -82,6 +87,48 @@ func renderLevelHelp(cmd *cobra.Command, level string) string {
 	}
 
 	fmt.Fprintf(&builder, "\nTip:\n  Run 'hello %s <chapter>' to execute a chapter demo.\n", level)
+
+	return builder.String()
+}
+
+func renderQuizLevelHelp(_ *cobra.Command) string {
+	var builder strings.Builder
+
+	builder.WriteString("Run a quiz chapter or full quiz entry point from the quiz track.\n\n")
+	builder.WriteString("Usage:\n  hello quiz <level>           (all chapters)\n  hello quiz <level> <chapter>   (single chapter)\n\n")
+	builder.WriteString("Examples:\n  hello quiz basic\n  hello quiz basic variables\n\n")
+
+	root := findProjectRoot()
+	quizDir := filepath.Join(root, "docs", "specs", "002-quiz-system", "questions")
+
+	builder.WriteString("Available levels and chapters:\n")
+
+	entries, err := os.ReadDir(quizDir)
+	if err != nil {
+		builder.WriteString("  (题目录尚未创建)\n")
+	} else {
+		for _, entry := range entries {
+			if !entry.IsDir() {
+				continue
+			}
+			level := entry.Name()
+			levelDir := filepath.Join(quizDir, level)
+			levelEntries, err := os.ReadDir(levelDir)
+			if err != nil {
+				continue
+			}
+			fmt.Fprintf(&builder, "  %s:\n", level)
+			for _, file := range levelEntries {
+				name := file.Name()
+				if strings.HasSuffix(name, ".yaml") || strings.HasSuffix(name, ".yml") {
+					chapter := strings.TrimSuffix(name, filepath.Ext(name))
+					fmt.Fprintf(&builder, "    - %s\n", chapter)
+				}
+			}
+		}
+	}
+
+	fmt.Fprintf(&builder, "\nTip:\n  Run 'hello quiz <level>' for a full quiz, or 'hello quiz <level> <chapter>' for a single chapter.\n")
 
 	return builder.String()
 }

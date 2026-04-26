@@ -1,0 +1,27 @@
+- question: "在 Go 标准库中，net/http 包提供了 HTTP 服务器和客户端的实现。以下关于 net/http 的描述，哪个是正确的？"
+  options:
+    - "默认端口 8080，无需额外配置即可接收 HTTPS 请求"
+    - "http.ListenAndServe 用于启动 HTTP 监听，http.ServeMux 是默认的多路复用器（Multiplexer）"
+    - "http.Get 方法只能处理 POST 请求，需调用 http.Post 处理 GET 请求"
+    - "必须使用第三方框架（如 Gin 或 Echo）才能构建 HTTP 服务器"
+  answer: 1
+  explanation: "Go 标准库的 net/http 包内置了 HTTP 服务器能力。http.ListenAndServe 启动监听（默认端口由参数决定），http.ServeMux 是默认的路由多路复用器，支持路径匹配和 Handler 分发。Go 无需第三方框架即可构建完整的 HTTP 服务。选项A错误（默认端口取决于传入参数），选项C错误（http.Get 处理 GET 请求），选项D错误（标准库已足够）。"
+  type: multiple-choice
+
+- question: "Go 中 JSON 序列化与反序列化使用 json 包的 Marshal 和 Unmarshal 函数。以下关于 Go JSON 处理的说法哪个正确？"
+  options:
+    - "结构体字段名在 JSON 中自动转为小写，无需 struct tag"
+    - "json.Marshal 返回 []byte 和 error，结构体字段需通过 `json:\"name\"` tag 控制序列化名称"
+    - "json.Unmarshal 可直接将 JSON 解析为 map[string]string，保留所有类型信息"
+    - "Go 的 json 包支持 YAML 格式的直接反序列化，无需额外配置"
+  answer: 1
+  explanation: "json.Marshal 返回 []byte 和 error，用于将 Go 结构体序列化为 JSON。默认使用字段名首字母大写形式作为 JSON key，通过 struct tag（如 `json:\"field_name\"`）可自定义。字段名不会自动转小写（选项A错）。json.Unmarshal 解析到 map[string]interface{} 而非 map[string]string（选项C错），且数值默认解析为 float64 会丢失类型信息。Go 标准库不支持 YAML 解析（选项D错）。"
+  type: multiple-choice
+
+- question: "net/http 的 ServeMux 默认支持并发安全的 Handler 注册，多个 goroutine 同时调用 Handle 或 HandleFunc 不会导致数据竞争。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。Go 1.x 之后的 net/http.ServeMux 内部使用 sync.RWMutex 保护 Handler 注册操作，支持并发安全的 Handler 注册。这意味着在多个 goroutine 中同时调用 Handle/HandleFunc 是安全的（通过内置读写锁实现线程安全），但在生产环境中，建议仍将路由注册放在程序初始化阶段（单线程），避免运行时动态注册带来的潜在问题。"
+  type: true-false

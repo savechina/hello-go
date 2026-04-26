@@ -1,0 +1,27 @@
+- question: "Context + Database 综合：在数据库查询中，为什么推荐使用 context.Context 作为第一个参数？\n\n```go\nfunc (r *UserRepo) FindByID(ctx context.Context, id int) (*User, error)\n```"
+  options:
+    - "为了在查询超时或客户端取消时能及时中断数据库操作，避免资源浪费"
+    - "为了在数据库中存储用户的 session 信息"
+    - "为了让数据库驱动自动重试失败的查询"
+    - "为了在日志中记录查询的上下文信息"
+  answer: 0
+  explanation: "Context 在数据库操作中的作用：1) 超时控制（WithTimeout）2) 请求取消传播（如 HTTP 请求被取消）3) 截止时间（WithDeadline）。GORM 的WithContext() 方法将 ctx 传递给底层 driver，使查询可被取消。"
+  type: multiple-choice
+
+- question: "Web + Error Handling 综合：在 Web API 中处理错误时，使用 errors.As 区分错误类型（如 ErrNotFound、ErrUnauthorized），返回对应的 HTTP 状态码和友好的 JSON 错误体是最佳实践"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "Web API 错误处理最佳实践：用 errors.As 判断错误类型，映射到适当的 HTTP 状态码（404/401/400/500）。返回结构化 JSON 错误体（code/message）。敏感错误信息不暴露给前端，记录到服务端日志。"
+  type: true-false
+
+- question: "Reflection + Config 综合：Viper 使用反射将配置绑定到 struct。以下代码中，如果配置文件中没有 `db_host` 字段，struct 的 DBHost 会是什么值？\n\n```go\ntype Config struct {\n    DBHost string `mapstructure:\"db_host\"`\n}\nvar cfg Config\nviper.Unmarshal(&cfg)\n```"
+  options:
+    - "空字符串 \"\"（Go string 的零值）"
+    - "nil"
+    - "panic"
+    - "\"localhost\"（Viper 的默认值）"
+  answer: 0
+  explanation: "Viper 的 Unmarshal 使用反射填充 struct 字段。如果配置中没有对应 key，struct 字段保持其 Go 零值。string 的零值是 \"\"。如需默认值，应在 unmarshal 前用 viper.SetDefault() 设置，或在 struct 中手动赋值。"
+  type: multiple-choice

@@ -1,0 +1,27 @@
+- question: "net/http 中 HandlerFunc 是 http.Handler 接口的实现"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "HandlerFunc 是 `func(http.ResponseWriter, *http.Request)` 的类型别名，它通过调用自身实现了 http.Handler 接口的 ServeHTTP 方法（内部执行 `f(w, r)`）。这使得普通函数可以当作 Handler 使用。"
+  type: true-false
+
+- question: "在 Go Web 开发中，如何正确实现一个记录请求日志的中间件（middleware）？"
+  options:
+    - "func loggingMiddleware(next http.Handler) http.Handler {\n  return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {\n    log.Println(r.Method, r.URL.Path)\n    next.ServeHTTP(w, r)\n  })\n}"
+    - "func loggingMiddleware(h http.HandlerFunc) http.HandlerFunc {\n  log.Println(h.Method)\n  return h\n}"
+    - "func loggingMiddleware(w http.ResponseWriter, r *http.Request) {\n  log.Println(r.URL.Path)\n}"
+    - "func loggingMiddleware() {\n  http.HandleFunc(\"/\", func(w http.ResponseWriter, r *http.Request) {\n    log.Println(r.Method)\n  })\n}"
+  answer: 0
+  explanation: "标准中间件模式：接收 http.Handler，返回 http.Handler。内部用 HandlerFunc 包装新逻辑，先执行前置操作（日志记录），再调用 next.ServeHTTP(w, r) 传递给下一个 handler。A 选项完整实现了这个模式。"
+  type: multiple-choice
+
+- question: "使用 encoding/json 包将 Go struct 编码为 JSON 时，哪个 struct tag 可以隐藏某个字段不被序列化？"
+  options:
+    - "`json:\"hidden\"`"
+    - "`json:\"-\"`"
+    - "`json:\"omitempty\"`"
+    - "`json:\"null\"`"
+  answer: 1
+  explanation: "tag `json:\"-\"` 表示该字段永远不参与 JSON 序列化/反序列化。omitempty 只在零值时跳过。hidden 和 null 不是有效的 json tag 值。"
+  type: multiple-choice

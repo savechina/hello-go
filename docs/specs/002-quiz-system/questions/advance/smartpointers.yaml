@@ -1,0 +1,27 @@
+- question: "sync.Pool 中的对象在 GC 时会被自动清理"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "sync.Pool 中的对象在每次 GC 前会被清空。这是设计决定的——Pool 是临时对象缓存，不保证对象存活。每次 GC 前，runtime 会遍历所有 Pool 并清空其中的对象。因此 Pool 适合短期高频分配的场景（如 buffer、连接）。"
+  type: true-false
+
+- question: "以下代码中，obj 的值是什么？\n\n```go\nvar pool = sync.Pool{New: func() any { return \"default\" }}\n\nfunc main() {\n    obj := pool.Get()\n    fmt.Println(obj)\n}\n```"
+  options:
+    - "nil"
+    - "\"default\""
+    - "panic"
+    - "空字符串 \"\""
+  answer: 1
+  explanation: "当 Pool 为空时（第一次 Get），New 函数会被调用来创建新对象。New 返回 \"default\"，所以 obj 的值是 \"default\"。New 是 Pool 的可选字段，如果为 nil 则 Get 返回 nil。"
+  type: multiple-choice
+
+- question: "defer 语句的执行顺序是什么？"
+  options:
+    - "FIFO（先进先出，先声明的 defer 先执行）"
+    - "LIFO（后进先出，后声明的 defer 先执行）"
+    - "随机顺序"
+    - "按 defer 函数名的字母顺序"
+  answer: 1
+  explanation: "defer 遵循 LIFO（后进先出）栈语义。后声明的 defer 先执行。例如：defer fmt.Println(\"a\"); defer fmt.Println(\"b\") 会先打印 \"b\" 再打印 \"a\"。这使得 defer 适合资源清理（如先 Open 后 Close 的配对操作）。"
+  type: multiple-choice

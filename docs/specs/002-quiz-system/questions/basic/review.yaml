@@ -1,0 +1,27 @@
+- question: "给定以下泛型函数：`func First[T interface{ ~int | ~string }](s []T) (T, bool)`，调用时以下哪个类型**不能**作为 T 传入？"
+  options:
+    - "`int` 切片，如 `[]int{1, 2, 3}`"
+    - "自定义类型 `type MyInt int` 的切片"
+    - "`string` 切片，如 `[]string{"a", "b"}`"
+    - "`float64` 切片，如 `[]float64{1.0, 2.0}`"
+  answer: 3
+  explanation: "类型约束 `~int | ~string` 表示只接受底层类型为 `int` 或 `string` 的类型（包括自定义类型）。`float64` 的底层类型不是 `int` 也不是 `string`，所以无法匹配约束，编译失败。"
+  type: multiple-choice
+
+- question: "分析以下 Go 代码的执行顺序：\n```go\nch := make(chan int, 1)\ngo func() { ch <- 3 }()\nresult := <-ch\ndefer fmt.Println(\"end\")\nfmt.Printf(\"result: %d\\n\", result)\n```\n`main` 函数中的打印顺序是什么？"
+  options:
+    - "先打印 'end'，再打印 'result: 3'"
+    - "先打印 'result: 3'，再打印 'end'"
+    - "只打印 'result: 3'"
+    - "发生 deadlock（死锁）"
+  answer: 1
+  explanation: "代码逻辑：goroutine 中发送 3 到 channel（有缓冲，不阻塞），main 中 `<-ch` 接收到 3 后继续执行，`defer` 尚未触发。`fmt.Printf("result: 3")` 先打印，main 函数 return 时 defer 执行，打印 end。最终顺序：result: 3 → end。"
+  type: multiple-choice
+
+- question: "Go 中如果一个函数返回 `chan error` 类型的 channel，调用方执行 `err := <-ch` 时会阻塞（block），直到 channel 中有数据可接收。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。对无缓冲 channel（或缓冲为空时）的执行 `<-ch` 接收操作会阻塞调用方 goroutine，直到有其他 goroutine 向该 channel 发送了数据。这是 channel 的核心同步机制，与 channel 中传输的具体类型（error、int 等）无关。"
+  type: true-false

@@ -1,0 +1,27 @@
+- question: "在 Go 中，以下哪种方式可以正确声明并初始化一个变量？"
+  options:
+    - "使用 := 短变量声明，如 x := 10（只能在函数体内使用）"
+    - "使用 var x = 10 只能在包级别使用"
+    - "使用 let x = 10 在任何位置声明变量"
+    - "声明变量时必须显式指定类型，如 var x int = 10"
+  answer: 0
+  explanation: ":= 是 Go 的短变量声明运算符，只能在函数体内使用，编译器会自动推断类型。var x = 10 既可以在函数体内也可以在包级别使用，所以选项B错误。Go 没有 let 关键字，选项C错误。var x = 10 可以不指定类型由编译器推断，选项D错误。"
+  type: multiple-choice
+
+- question: "关于 const 和 iota，以下说法正确的是？"
+  options:
+    - "iota 是一个可以在运行时修改的常量"
+    - "const 块中 iota 从 0 开始，每行的 iota 值递增 1"
+    - "const 声明的变量可以是 slice 或 map 类型"
+    - "iota 只能在 const 块外独立使用"
+  answer: 1
+  explanation: "iota 是 Go 的常量计数器，在 const 块中从 0 开始，每新增一行常量声明就递增 1。const 的值必须是编译期常量，不能是 slice 或 map 等运行时类型，所以选项C错误。iota 只能在 const 块中使用，选项D错误。iota 本身也是编译期常量，运行时不可修改，选项A错误。"
+  type: multiple-choice
+
+- question: "Go 中的所有变量在未显式初始化时都会有一个默认的零值（zero value），例如 int 为 0，string 为空字符串，指针为 nil。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。Go 语言设计中所有变量都有零值，这是语言规范的一部分。数值类型零值为 0，布尔类型为 false，字符串为空字符串 \"\"，指针、slice、map、channel、function、interface 的零值为 nil。这避免了使用未初始化变量导致的未定义行为。"
+  type: true-false

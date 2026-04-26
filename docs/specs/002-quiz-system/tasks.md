@@ -26,14 +26,14 @@
 
 **Purpose**: Core Go package for loading YAML questions, running interactive quiz sessions, and scoring.
 
-- [ ] T001 [US1] Create `internal/quiz/types.go` — define `Question`, `QuizSession`, `QuizResult` structs (Question has: ID, chapter, type (multiple-choice/true-false), question text, options, answer index, explanation)
-- [ ] T002 [US1] Create `internal/quiz/engine.go` — `LoadQuiz(path string) ([]Question, error)`, `RunQuiz(questions []Question, interactive bool) (*QuizResult, error)` — YAML loading via `gopkg.in/yaml.v3`
-- [ ] T003 [US1] Implement interactive prompt in `engine.go` — display question, accept A/B/C/D input, validate input, show immediate feedback (✅/❌ + explanation)
-- [ ] T004 [US1] Implement scoring in `engine.go` — track correct/total, calculate percentage, generate learning suggestions based on wrong answers
-- [ ] T005 [P] [US1] Add `go.mod` dependency: `gopkg.in/yaml.v3` — run `go get gopkg.in/yaml.v3 && go mod tidy`
-- [ ] T006 [US1] Create `internal/quiz/engine_test.go` — table-driven tests for: YAML loading (valid/invalid), scoring calculation, suggestion generation
+- [x] T001 [US1] Create `internal/quiz/types.go` — define `Question`, `QuizSession`, `QuizResult` structs (Question has: ID, chapter, type (multiple-choice/true-false), question text, options, answer index, explanation)
+- [x] T002 [US1] Create `internal/quiz/engine.go` — `LoadQuiz(path string) ([]Question, error)`, `RunQuiz(questions []Question, interactive bool) (*QuizResult, error)` — YAML loading via `gopkg.in/yaml.v3`
+- [x] T003 [US1] Implement interactive prompt in `engine.go` — display question, accept A/B/C/D input, validate input, show immediate feedback (✅/❌ + explanation)
+- [x] T004 [US1] Implement scoring in `engine.go` — track correct/total, calculate percentage, generate learning suggestions based on wrong answers
+- [x] T005 [P] [US1] Add `go.mod` dependency: `gopkg.in/yaml.v3` — run `go get gopkg.in/yaml.v3 && go mod tidy`
+- [x] T006 [US1] Create `internal/quiz/engine_test.go` — table-driven tests for: YAML loading (valid/invalid), scoring calculation, suggestion generation
 
-**Checkpoint**: `go test ./internal/quiz/...` passes. Quiz engine can load a YAML file and run an interactive quiz session.
+**Checkpoint**: `go test ./internal/quiz/...` passes (4/4, 84.2% coverage). Quiz engine can load a YAML file and run an interactive quiz session.
 
 ---
 
@@ -45,19 +45,19 @@
 
 ### YAML Question Files for Basic Chapters
 
-- [ ] T007 [US1] Create `docs/specs/002-quiz-system/questions/basic/variables.yaml` — 3+ questions on var/const/iota/type inference
-- [ ] T008 [US1] Create `docs/specs/002-quiz-system/questions/basic/datatype.yaml` — 3+ questions on int/float/bool/string/slice/map/time
-- [ ] T009 [US1] Create `docs/specs/002-quiz-system/questions/basic/functions.yaml` — 3+ questions on parameters/returns/closures/variadic
-- [ ] T010 [US1] Create `docs/specs/002-quiz-system/questions/basic/flowcontrol.yaml` — 3+ questions on if/for/switch/defer
-- [ ] T011 [US1] Create `docs/specs/002-quiz-system/questions/basic/structs.yaml` — 3+ questions on struct definition/methods/embedding
-- [ ] T012 [US1] Create `docs/specs/002-quiz-system/questions/basic/interfaces.yaml` — 3+ questions on implicit implementation/empty interface/io.Writer
-- [ ] T013 [US1] Create `docs/specs/002-quiz-system/questions/basic/concurrency.yaml` — 3+ questions on goroutines/channels/select
-- [ ] T014 [US1] Create `docs/specs/002-quiz-system/questions/basic/generics.yaml` — 3+ questions on type parameters/constraints
-- [ ] T015 [US1] Create `docs/specs/002-quiz-system/questions/basic/packages.yaml` — 3+ questions on visibility/init/import
-- [ ] T016 [US1] Create `docs/specs/002-quiz-system/questions/basic/pointers.yaml` — 3+ questions on &/*/nil/value-vs-pointer
-- [ ] T017 [US1] Create `docs/specs/002-quiz-system/questions/basic/logging.yaml` — 3+ questions on log/slog/levels/handlers
-- [ ] T018 [US1] Create `docs/specs/002-quiz-system/questions/basic/errorhandling.yaml` — 3+ questions on errors.Is/As/sentinel errors
-- [ ] T019 [US1] Create `docs/specs/002-quiz-system/questions/basic/review.yaml` — 3+ questions integrating basic concepts
+- [x] T007 [US1] Create `docs/specs/002-quiz-system/questions/basic/variables.yaml` — 3+ questions on var/const/iota/type inference
+- [x] T008 [US1] Create `docs/specs/002-quiz-system/questions/basic/datatype.yaml` — 3+ questions on int/float/bool/string/slice/map/time
+- [x] T009 [US1] Create `docs/specs/002-quiz-system/questions/basic/functions.yaml` — 3+ questions on parameters/returns/closures/variadic
+- [x] T010 [US1] Create `docs/specs/002-quiz-system/questions/basic/flowcontrol.yaml` — 3+ questions on if/for/switch/defer
+- [x] T011 [US1] Create `docs/specs/002-quiz-system/questions/basic/structs.yaml` — 3+ questions on struct definition/methods/embedding
+- [x] T012 [US1] Create `docs/specs/002-quiz-system/questions/basic/interfaces.yaml` — 3+ questions on implicit implementation/empty interface/io.Writer
+- [x] T013 [US1] Create `docs/specs/002-quiz-system/questions/basic/concurrency.yaml` — 3+ questions on goroutines/channels/select
+- [x] T014 [US1] Create `docs/specs/002-quiz-system/questions/basic/generics.yaml` — 3+ questions on type parameters/constraints
+- [x] T015 [US1] Create `docs/specs/002-quiz-system/questions/basic/packages.yaml` — 3+ questions on visibility/init/import
+- [x] T016 [US1] Create `docs/specs/002-quiz-system/questions/basic/pointers.yaml` — 3+ questions on &/*/nil/value-vs-pointer
+- [x] T017 [US1] Create `docs/specs/002-quiz-system/questions/basic/logging.yaml` — 3+ questions on log/slog/levels/handlers
+- [x] T018 [US1] Create `docs/specs/002-quiz-system/questions/basic/errorhandling.yaml` — 3+ questions on errors.Is/As/sentinel errors
+- [x] T019 [US1] Create `docs/specs/002-quiz-system/questions/basic/review.yaml` — 3+ questions integrating basic concepts
 
 **Question Quality Requirements (T007-T019)**:
 - Each question MUST have: question text, 4 options (A-D for multiple-choice OR 2 options for true-false), correct answer index, explanation
@@ -77,16 +77,16 @@
 
 ### YAML Question Files for Advanced Chapters
 
-- [ ] T020 [US2] Create `docs/specs/002-quiz-system/questions/advance/database.yaml` — 3+ questions on GORM CRUD/relationships/transactions
-- [ ] T021 [US2] Create `docs/specs/002-quiz-system/questions/advance/web.yaml` — 3+ questions on handlers/middleware/JSON API
-- [ ] T022 [US2] Create `docs/specs/002-quiz-system/questions/advance/errorhandling.yaml` — 3+ questions on errors.Is/As/%w/custom types
-- [ ] T023 [US2] Create `docs/specs/002-quiz-system/questions/advance/context.yaml` — 3+ questions on WithCancel/WithTimeout/cancellation/goroutine leaks
-- [ ] T024 [US2] Create `docs/specs/002-quiz-system/questions/advance/concurrency_advanced.yaml` — 3+ questions on Mutex/RWMutex/atomic/race detection
-- [ ] T025 [US2] Create `docs/specs/002-quiz-system/questions/advance/reflection.yaml` — 3+ questions on reflect.Type/Value/struct tags/dynamic method calls
-- [ ] T026 [US2] Create `docs/specs/002-quiz-system/questions/advance/testing.yaml` — 3+ questions on table-driven tests/benchmarks/fuzzing
-- [ ] T027 [US2] Create `docs/specs/002-quiz-system/questions/advance/config.yaml` — 3+ questions on config loading/env override/reflection binding
-- [ ] T028 [US2] Create `docs/specs/002-quiz-system/questions/advance/smartpointers.yaml` — 3+ questions on reference counting/sync.Pool/defer cleanup
-- [ ] T029 [US2] Create `docs/specs/002-quiz-system/questions/advance/review.yaml` — 3+ questions integrating advance concepts
+- [x] T020 [US2] Create `docs/specs/002-quiz-system/questions/advance/database.yaml` — 3+ questions on GORM CRUD/relationships/transactions
+- [x] T021 [US2] Create `docs/specs/002-quiz-system/questions/advance/web.yaml` — 3+ questions on handlers/middleware/JSON API
+- [x] T022 [US2] Create `docs/specs/002-quiz-system/questions/advance/errorhandling.yaml` — 3+ questions on errors.Is/As/%w/custom types
+- [x] T023 [US2] Create `docs/specs/002-quiz-system/questions/advance/context.yaml` — 3+ questions on WithCancel/WithTimeout/cancellation/goroutine leaks
+- [x] T024 [US2] Create `docs/specs/002-quiz-system/questions/advance/concurrency_advanced.yaml` — 3+ questions on Mutex/RWMutex/atomic/race detection
+- [x] T025 [US2] Create `docs/specs/002-quiz-system/questions/advance/reflection.yaml` — 3+ questions on reflect.Type/Value/struct tags/dynamic method calls
+- [x] T026 [US2] Create `docs/specs/002-quiz-system/questions/advance/testing.yaml` — 3+ questions on table-driven tests/benchmarks/fuzzing
+- [x] T027 [US2] Create `docs/specs/002-quiz-system/questions/advance/config.yaml` — 3+ questions on config loading/env override/reflection binding
+- [x] T028 [US2] Create `docs/specs/002-quiz-system/questions/advance/smartpointers.yaml` — 3+ questions on reference counting/sync.Pool/defer cleanup
+- [x] T029 [US2] Create `docs/specs/002-quiz-system/questions/advance/review.yaml` — 3+ questions integrating advance concepts
 
 **Question Quality Requirements (T020-T029)**: Same as Phase 2.
 
@@ -100,11 +100,11 @@
 
 **Independent Test**: Quiz index page renders correctly in mdBook with all chapter links.
 
-- [ ] T030 [US3] Create `docs/specs/002-quiz-system/questions/awesome/webservice.yaml` — 3+ questions on REST/JSON/thread-safe middleware
-- [ ] T031 [US3] Create `docs/specs/002-quiz-system/questions/awesome/clidemo.yaml` — 3+ questions on command parsing/subcommand routing/input validation
-- [ ] T032 [US3] Create `docs/specs/002-quiz-system/questions/awesome/datapipeline.yaml` — 3+ questions on worker pool/channel pipeline/graceful shutdown
-- [ ] T033 [US3] Create `docs/specs/002-quiz-system/questions/awesome/tooling.yaml` — 3+ questions on testing/benchmarking/profiling
-- [ ] T034 [US3] Write `docs/src/quiz/index.md` — quiz index page with: overview paragraph, table of all 25 chapters by level, question count per chapter, links to individual question pages
+- [x] T030 [US3] Create `docs/specs/002-quiz-system/questions/awesome/webservice.yaml` — 3+ questions on REST/JSON/thread-safe middleware
+- [x] T031 [US3] Create `docs/specs/002-quiz-system/questions/awesome/clidemo.yaml` — 3+ questions on command parsing/subcommand routing/input validation
+- [x] T032 [US3] Create `docs/specs/002-quiz-system/questions/awesome/datapipeline.yaml` — 3+ questions on worker pool/channel pipeline/graceful shutdown
+- [x] T033 [US3] Create `docs/specs/002-quiz-system/questions/awesome/tooling.yaml` — 3+ questions on testing/benchmarking/profiling
+- [x] T034 [US3] Write `docs/src/quiz/index.md` — quiz index page with: overview paragraph, table of all 25 chapters by level, question count per chapter, links to individual question pages
 
 **Checkpoint**: 12+ awesome questions + quiz index page. Total questions: ~75+. mdBook build passes for quiz/index.md.
 
@@ -114,11 +114,11 @@
 
 **Purpose**: Wire quiz engine into existing `cmd/hello` CLI, add help docs, error handling.
 
-- [ ] T035 Add `quiz` subcommand to `cmd/hello/main.go` — route to `hello quiz <level> [chapter]`
-- [ ] T036 [P] Implement `--help` for quiz subcommand in `cmd/hello/help.go` — show usage: `quiz basic [chapter]`, `quiz advance`, `quiz random 10`
-- [ ] T037 Implement error handling — invalid level/chapter shows helpful error message, missing YAML file gives clear "题库尚未完成" message
-- [ ] T038 Implement summary mode (`quiz basic` without chapter arg) — load all questions for that level, randomize order, show per-chapter breakdown
-- [ ] T039 Add `go run ./cmd/hello quiz` validation — verify `quiz basic variables` loads and runs 3 questions interactively
+- [x] T035 Add `quiz` subcommand to `cmd/hello/main.go` — route to `hello quiz <level> [chapter]`
+- [x] T036 [P] Implement `--help` for quiz subcommand in `cmd/hello/help.go` — show usage: `quiz basic [chapter]`, `quiz advance`, `quiz random 10`
+- [x] T037 Implement error handling — invalid level/chapter shows helpful error message, missing YAML file gives clear "题库尚未完成" message
+- [x] T038 Implement summary mode (`quiz basic` without chapter arg) — load all questions for that level, randomize order, show per-chapter breakdown
+- [x] T039 Add `go run ./cmd/hello quiz` validation — verify `quiz basic variables` loads and runs 3 questions interactively
 
 **Checkpoint**: `go run ./cmd/hello quiz --help` shows docs. `quiz basic variables` works. `quiz basic` runs 36-question summary.
 
@@ -128,13 +128,13 @@
 
 **Purpose**: Quality gates, cross-link verification, final cleanup.
 
-- [ ] T040 Run `go build ./internal/quiz/...` — verify zero compilation errors
-- [ ] T041 Run `go test -cover ./internal/quiz/...` — verify >80% coverage
-- [ ] T042 Run YAML validation script — verify all 25 YAML files parse correctly and have ≥3 questions each
-- [ ] T043 Run `mdbook build docs/` — verify quiz/index.md renders with zero errors
-- [ ] T044 [P] Verify all quiz index page links in `docs/src/quiz/index.md` point to valid chapters
-- [ ] T045 [P] Run `go run ./cmd/hello quiz basic` end-to-end test — manually verify at least 1 chapter flow
-- [ ] T046 [P] Verify question quality — spot-check 5 questions per level for correctness and explanation clarity
+- [x] T040 Run `go build ./internal/quiz/...` — verify zero compilation errors
+- [x] T041 Run `go test -cover ./internal/quiz/...` — verify >80% coverage
+- [x] T042 Run YAML validation script — verify all 25 YAML files parse correctly and have ≥3 questions each
+- [x] T043 Run `mdbook build docs/` — verify quiz/index.md renders with zero errors
+- [x] T044 [P] Verify all quiz index page links in `docs/src/quiz/index.md` point to valid chapters
+- [x] T045 [P] Run `go run ./cmd/hello quiz basic` end-to-end test — manually verify at least 1 chapter flow
+- [x] T046 [P] Verify question quality — spot-check 5 questions per level for correctness and explanation clarity
 
 ---
 

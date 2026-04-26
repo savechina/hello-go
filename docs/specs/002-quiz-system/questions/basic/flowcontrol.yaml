@@ -1,0 +1,27 @@
+- question: "Go 中的 for 循环有三种常见写法，以下关于 for 循环的描述正确的是？"
+  options:
+    - "Go 支持 for、while、do-while 三种循环语句"
+    - "for i := 0; i < 10; i++ 是传统三段式写法，for condition 是条件式写法，for {} 是无限循环写法"
+    - "for range 只能遍历 slice 和 array，不能遍历 map 和 string"
+    - "Go 的 for 循环的循环变量在每次迭代中都是一个新的独立变量，不会共享"
+  answer: 1
+  explanation: "Go 只有 for 一种循环语句，通过三种形式覆盖所有场景：传统 for（初始化; 条件; 后置）、条件 for（类似 while）、无限 for。for range 可以遍历 array、slice、map、string 和 channel，所以选项C错误。Go 1.22 之前 for 循环变量在迭代间共享（需 copy），1.22+ 改为每次迭代新建变量，选项D的说法因版本而异，不如B准确。选项A错误——Go 没有 while 和 do-while 关键字。"
+  type: multiple-choice
+
+- question: "关于 defer 的执行顺序，以下描述正确的是？"
+  options:
+    - "defer 按照声明顺序依次执行（FIFO）"
+    - "defer 按照声明的相反顺序执行（LIFO），最后声明的最先执行"
+    - "defer 在函数 return 后立即执行，不影响返回值"
+    - "多个 defer 的执行顺序是不确定的，由运行时调度决定"
+  answer: 1
+  explanation: "defer 遵循 LIFO（后进先出）顺序：最后声明的 defer 函数最先执行。这是 Go 的设计选择，类似栈的行为，方便资源清理（如先打开后关闭）。defer 在 return 之后、函数真正退出之前执行，如果使用命名返回值（named return value），defer 中可以修改返回值，所以选项C不完全正确。选项A和D与 Go 的实际行为不符。"
+  type: multiple-choice
+
+- question: "Go 语言除了 for 循环外，还提供了 while 关键字来实现条件循环。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 1
+  explanation: "错误。Go 语言设计中没有 while 关键字。所有循环场景统一使用 for 实现：for condition {} 等价于传统语言的 while(condition) {}。这是 Go '少即是多'设计哲学的体现——减少语法关键字，用一种结构覆盖所有场景。如果需要 do-while 的效果，可以用 for { ...; if !cond { break } } 实现。"
+  type: true-false

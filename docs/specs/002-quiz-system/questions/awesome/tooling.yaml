@@ -1,0 +1,27 @@
+- question: "Go 的 testing 包提供了单元测试和基准测试（benchmark）的内置支持。以下关于 Go 测试的说法，哪个是正确的？"
+  options:
+    - "测试函数必须以 Test 开头，文件必须以 _test.go 结尾，且测试函数必须包含 t *testing.T 参数"
+    - "Go 测试无需独立测试文件，测试代码可直接写在 main.go 中"
+    - "基准测试函数以 Benchmark 开头，接收 b *testing.B 参数，通过 b.N 控制迭代次数"
+    - "go test 只支持单元测试，不支持集成测试，集成测试必须使用第三方框架（如 Testify）"
+  answer: 2
+  explanation: "Go 基准测试函数以 Benchmark 开头（如 func BenchmarkSomething(b *testing.B)），接收 *testing.B 参数，b.N 是迭代次数，Go 会根据执行时间自动调整 N 的值以获得稳定的基准结果。选项A错误（测试函数确实需要 Test 前缀和 _test.go 文件，但参数是 *testing.T 而非 *testing.B），选项B错误（测试代码必须在独立的 _test.go 文件中），选项D错误（go test 同时支持单元和集成测试，Testify 只是辅助库而非必需）。"
+  type: multiple-choice
+
+- question: "Go 提供了内置的 profiling 支持，通过 go test 和 pprof 进行性能分析。以下关于 Go 性能分析的说法，哪个是正确的？"
+  options:
+    - "go test 只支持单元测试，无法生成 CPU/内存 profile 数据"
+    - "通过 go test -cpuprofile=cpu.out 和 go test -memprofile=mem.out 可生成 profile 文件，使用 go tool pprof 可视化分析瓶颈"
+    - "pprof 只能分析 HTTP 服务的性能，无法分析测试或独立程序的 CPU 使用"
+    - "Go 没有内置 profiling 工具，必须使用第三方工具（如 Datadog APM 或 Prometheus）"
+  answer: 1
+  explanation: "Go 测试内置 profile 支持：go test -cpuprofile=cpu.out 生成 CPU profile，-memprofile=mem.out 生成内存 profile。go tool pprof 可交互式分析 profile 文件，生成火焰图或文本报告，识别 CPU/内存瓶颈。pprof 也可通过集成 net/http/pprof 分析 HTTP 服务（选项C错误，pprof 不仅限于 HTTP）。Go 标准库自带完整的 profiling 能力（选项D错误），无需第三方工具。"
+  type: multiple-choice
+
+- question: "运行 go test -coverprofile=coverage.out . 可以在执行测试的同时生成代码覆盖率报告，通过 go tool cover -html=coverage.out 可查看可视化覆盖率分析。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。go test -coverprofile=coverage.out 生成覆盖率数据文件，go tool cover -html=coverage.out 在浏览器中打开可视化覆盖率报告（绿色为已覆盖，红色为未覆盖）。这是 Go 标准库内置的覆盖率分析功能，无需第三方工具。还支持 -covermode=count/set/atomic 等模式控制统计粒度，以及通过 Coveralls 等 CI 工具集成覆盖率到代码审查流程。"
+  type: true-false

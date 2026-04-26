@@ -1,0 +1,27 @@
+- question: "关于 Go 中 struct 的字段初始化，以下描述正确的是？"
+  options:
+    - "struct 声明后未显式初始化的字段会被赋予各自类型的零值"
+    - "struct 必须通过 new 关键字才能创建实例，否则无法使用"
+    - "struct 的字段可以不导出（小写开头），在任何包中都可以直接访问"
+    - "struct 初始化时必须为所有字段赋值，否则会编译错误"
+  answer: 0
+  explanation: "Go 的 struct 变量声明后（如 var s MyStruct），所有未显式赋值的字段自动获得对应类型的零值（int 为 0，string 为空，指针为 nil 等）。struct 可以直接通过 var s MyStruct 或 s := MyStruct{} 创建，不需要 new，选项B错误。小写字段名是未导出字段（unexported），只能在同一个包内访问，选项C中'任何包'的说法错误。选项D错误——Go 允许部分字段初始化（键值对语法），其余自动为零值。"
+  type: multiple-choice
+
+- question: "Go 中值接收者（value receiver）和指针接收者（pointer receiver）方法的主要区别是什么？"
+  options:
+    - "值接收者方法可以修改 struct 的字段，指针接收者不能"
+    - "值接收者方法操作的是 struct 的副本，不能修改原 struct；指针接收者可以直接修改原 struct"
+    - "值接收者和指针接收者在语义上完全等价，可以随意混用"
+    - "指针接收者方法只能在 struct 指针上调用，不能在 struct 值上调用"
+  answer: 1
+  explanation: "值接收者会在方法调用时创建 struct 的副本，方法内对字段的修改只影响副本，不影响原始 struct。指针接收者传递的是地址，方法内修改直接影响原始 struct。选项A说反了。选项C错误——两者语义不同，选择取决于是否需要修改接收者以及 struct 大小（大 struct 用指针避免拷贝）。选项D错误——Go 自动处理取地址：在值上调用指针接收者方法时，编译器会自动取地址。"
+  type: multiple-choice
+
+- question: "Go 支持 struct 嵌入（embedded struct）来实现组合（composition），嵌入的字段会自动提升其方法和字段到外层 struct。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。Go 通过 struct 嵌入实现组合而非继承。当将一个类型作为匿名字段嵌入到另一个 struct 时，被嵌入类型的方法会提升（promote）为外层 struct 的方法，字段也可以直接通过外层访问。例如嵌入 base struct 到 derived struct 后，可以直接调用 derived.Method()（实际调用的是 base 的方法）。这是 Go 实现代码复用的核心机制。"
+  type: true-false

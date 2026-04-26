@@ -1,0 +1,27 @@
+- question: "Worker Pool（工作池）是 Go 中处理并发任务的高效模式。以下关于 Worker Pool 的说法，哪个是正确的？"
+  options:
+    - "每个 Worker 独立创建 goroutine，任务通过全局锁分配给 Worker"
+    - "Worker Pool 通过固定数量的 goroutine 从共享 channel 消费任务，控制并发度并避免资源耗尽"
+    - "Worker Pool 是 Go 运行时内置的调度器，无法手动实现"
+    - "Worker Pool 只支持同步任务处理，不支持异步回调"
+  answer: 1
+  explanation: "Worker Pool 是 Go 并发编程的经典模式：启动固定数量的 goroutine（workers），它们从共享的 task channel 读取任务并执行，结果通过 result channel 返回。通过控制 worker 数量，可以限制并发度，避免创建过多 goroutine 导致内存耗尽。选项A错误（通过 channel 分发任务，而非全局锁），选项C错误（手动实现），选项D错误（支持异步）。"
+  type: multiple-choice
+
+- question: "Channel Pipeline 是 Go 中常用的数据流处理模式。在一个典型的多阶段 pipeline 中，数据从一个阶段流向下一个阶段，每个阶段通过 goroutine 和 channel 连接。以下关于 Pipeline 的说法，哪个是正确的？"
+  options:
+    - "Pipeline 的每个阶段必须等待前一阶段完成后才能开始处理"
+    - "Pipeline 通过 channel 连接多个阶段，每个阶段是独立的 goroutine，数据通过 channel 流式传输，实现并发处理和背压（backpressure）控制"
+    - "Pipeline 只能处理固定长度的数据，不支持流式处理无限数据流"
+    - "Pipeline 中 channel 只能使用有缓冲 channel，无缓冲 channel 会导致死锁"
+  answer: 1
+  explanation: "Channel Pipeline 是 Go 标准并发模式：数据通过 channel 在不同阶段间流式传输，每个阶段由独立 goroutine 驱动。有缓冲 channel 可作为缓冲区（buffer），实现背压控制（上游生产快于下游消费时的缓冲）。Pipeline 支持无限数据流（选项C错），无缓冲 channel 也可用于 Pipeline 但不具备缓冲能力（选项D错）。选项A错在 Pipeline 的核心是并发处理而非阻塞等待。典型实现参考 Go Concurrency Patterns: Pipelines and Cancellation 演讲。"
+  type: multiple-choice
+
+- question: "Go 中的 fan-out/fan-in 模式（一个阶段生成多个 goroutine 处理数据 fan-out，再合并结果 fan-in）需要使用 sync.WaitGroup 来等待所有 fan-out goroutine 完成。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。fan-out/fan-in 是 Go 标准并发模式：fan-out 阶段将数据分发到多个 goroutine 处理，fan-in 阶段将多个结果合并。WaitGroup 用于跟踪所有 fan-out goroutine 的完成情况，确保所有 goroutine 完成后才关闭 fan-in 的合并 channel，避免 channel 提前关闭导致 panic。Go 官方文档和 Concurrency Patterns 演讲中，WaitGroup + channel 是 fan-out/fan-in 的标准实现方式。"
+  type: true-false

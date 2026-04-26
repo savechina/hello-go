@@ -1,0 +1,27 @@
+- question: "如何正确启动一个 goroutine 来并发执行函数？"
+  options:
+    - "使用 go 关键字前缀，如 go myFunction()"
+    - "使用 goroutine myFunction() 声明"
+    - "使用 thread myFunction() 创建并发执行单元"
+    - "将函数赋值给 channel 来启动 goroutine"
+  answer: 0
+  explanation: "Go 通过 go 关键字前缀来启动 goroutine：go funcName(args)。这会让函数在新的 goroutine 中异步执行，主 goroutine 不会等待它完成。Go 没有 goroutine 或 thread 这样的关键字。选项D错误——channel 用于 goroutine 间通信，不是启动 goroutine 的方式。goroutine 由 Go 运行时调度（非 OS 线程一对一），非常轻量。"
+  type: multiple-choice
+
+- question: "关于 Go 中 channel 的发送和接收语法，以下哪个选项是正确的？"
+  options:
+    - "发送：ch <- value，接收：value := <-ch"
+    - "发送：value <- ch，接收：value = ch >"
+    - "发送：ch --> value，接收：value <-- ch"
+    - "发送和接收都使用 ch.send(value) 和 ch.receive() 方法"
+  answer: 0
+  explanation: "Go 中 channel 的箭头方向直观表示数据流向：ch <- value 表示数据从右往左流入 channel（发送），value := <-ch 表示数据从 channel 流出到变量（接收）。箭头的指向即数据流向的方向，这是 Go 语法设计的美学之一。选项B、C、D的语法在 Go 中都不存在。"
+  type: multiple-choice
+
+- question: "向一个未初始化的 nil channel 发送数据（如 ch <- value）会导致 runtime panic。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。向 nil channel 发送数据会永久阻塞（deadlock），在 main goroutine 中会触发 panic：'all goroutines are asleep - deadlock!'。从 nil channel 接收同样会永久阻塞。这是因为 nil channel 既没有缓冲区也没有与之配对的发送/接收方。正确的做法是始终先通过 make 初始化 channel：ch := make(chan int)。注意：关闭（close）nil channel 会直接 panic，而不是阻塞。"
+  type: true-false

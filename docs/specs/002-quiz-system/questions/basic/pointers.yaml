@@ -1,0 +1,27 @@
+- question: "在 Go 中，运算符 `&x` 和 `*p` 分别表示什么含义？"
+  options:
+    - "`&x` 解引用 x 的值，`*p` 取 p 的地址"
+    - "`&x` 取 x 的地址，`*p` 解引用 p 指向的值"
+    - "`&x` 复制 x 的值，`*p` 创建 p 的指针"
+    - "`&x` 和 `*p` 都表示取地址"
+  answer: 1
+  explanation: "`&` 是取地址运算符，`&x` 返回 x 的内存地址（类型为 `*T`）；`*` 是解引用运算符，`*p` 访问指针 p 指向的实际值。"
+  type: multiple-choice
+
+- question: "Go 中指针类型的零值（zero value）是什么？"
+  options:
+    - "0"
+    - "`nil`"
+    - "空地址 `0x0`（非 nil）"
+    - "取决于指针指向的类型"
+  answer: 1
+  explanation: "Go 中所有指针类型的零值都是 `nil`。声明但未初始化的指针变量自动赋值为 `nil`，此时解引用会导致 `panic: runtime error: invalid memory address or nil pointer dereference`。"
+  type: multiple-choice
+
+- question: "Go 支持指针运算（pointer arithmetic），例如可以对 `uintptr` 或指针进行加减整数操作来访问相邻内存。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 1
+  explanation: "错误（大部分情况下）。Go 的类型安全指针不支持加减运算（如 `ptr + 1` 会导致编译错误）。虽然 `unsafe.Pointer` 结合 `uintptr` 可以实现类似效果，但这属于 unsafe 操作，不是 Go 语言的安全特性，日常编码中不支持指针算术。"
+  type: true-false

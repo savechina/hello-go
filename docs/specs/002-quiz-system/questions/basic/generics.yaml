@@ -1,0 +1,27 @@
+- question: "在 Go 泛型函数 `func Min[T any](a, b T) T` 中，类型参数 `[T any]` 的作用是什么？"
+  options:
+    - "限定 T 必须是整数类型"
+    - "表示 T 可以是任意类型，不施加任何约束"
+    - "让函数在运行时动态确定 T 的类型"
+    - "等同于 C++ 中的宏展开"
+  answer: 1
+  explanation: "`any` 是 `interface{}` 的别名，表示类型参数 T 可以接受任意类型，不施加约束。泛型在编译期完成类型单态化，不会产生运行时开销。"
+  type: multiple-choice
+
+- question: "在 Go 泛型中，`comparable` 约束（constraint）的作用是什么？"
+  options:
+    - "允许使用该类型的 `==` 和 `!=` 比较运算符"
+    - "允许对该类型的值进行大小排序（如 `<`、`>`）"
+    - "使该类型支持反射（reflection）"
+    - "允许将该类型用作 map 的 value 类型"
+  answer: 0
+  explanation: "`comparable` 是 Go 内置的预声明约束，表示该类型支持 `==` 和 `!=` 运算符。它不包含 `<`、`>` 等排序比较，也不代表支持反射或 map value。"
+  type: multiple-choice
+
+- question: "Go 的泛型是在运行时（runtime）根据传入参数动态确定类型的。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 1
+  explanation: "错误。Go 的泛型在编译期（compile time）通过单态化（monomorphization）为每种具体类型生成独立代码，运行时不保留泛型信息，因此零运行时开销。"
+  type: true-false

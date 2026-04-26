@@ -1,0 +1,27 @@
+- question: "reflect.Value can be modified even if it's an unaddressable value"
+  options:
+    - "正确"
+    - "错误"
+  answer: 1
+  explanation: "reflect.Value 只有在 addressable（可取地址）的情况下才能被修改。通过 reflect.ValueOf(x) 直接创建的 value 如果不是指针或 slice/map element，则不可修改。调用 SetInt/SetString 等方法会 panic。必须通过 reflect.ValueOf(&x).Elem() 获取可修改的 value。"
+  type: true-false
+
+- question: "如何从 reflect.Type 获取 struct 字段的 tag 值？"
+  options:
+    - "t.Field(i).Tag 返回 reflect.StructTag，调用 Get(\"key\") 或 Lookup(\"key\")"
+    - "t.Field(i).TagValue(\"key\")"
+    - "t.Tag(\"key\")"
+    - "struct tag 在运行时不可通过反射获取"
+  answer: 0
+  explanation: "reflect.Type.Field(i) 返回 StructField，其 Tag 字段是 reflect.StructTag 类型。调用 Tag.Get(\"json\") 返回 tag 值，Tag.Lookup(\"json\") 返回 (值, 是否存在)。这是获取 struct tag 的标准方式。"
+  type: multiple-choice
+
+- question: "reflect.ValueOf(42).Kind() 的返回值是什么？"
+  options:
+    - "reflect.Int"
+    - "reflect.Int32"
+    - "reflect.Interface"
+    - "reflect.Uint"
+  answer: 0
+  explanation: "42 是 untyped integer constant，在 Go 中默认类型为 int。reflect.ValueOf(42).Kind() 返回 reflect.Int。注意 Kind() 返回的是底层 type kind，不是具体的 type name。int 的 kind 就是 Int。"
+  type: multiple-choice

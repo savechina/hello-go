@@ -1,0 +1,27 @@
+- question: "GORM 中如何正确创建一条新记录？"
+  options:
+    - "db.Insert(&user)"
+    - "db.Create(&user)"
+    - "db.New(&user)"
+    - "db.Add(&user)"
+  answer: 1
+  explanation: "GORM 使用 Create 方法插入新记录。它会自动处理主键回填，并将结果写入传入的指针。Insert/Add/New 都不是 GORM 的标准方法。"
+  type: multiple-choice
+
+- question: "GORM 中事务通过 db.Transaction() 实现，回调函数返回 error 会自动回滚"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "db.Transaction() 接收一个回调函数 tx *gorm.DB。如果回调函数返回 nil，事务自动 commit；如果返回 error，事务自动 rollback。这是 GORM 的事务管理模式。"
+  type: true-false
+
+- question: "在 GORM 中，如何定义 User 和 Order 的一对多（one-to-many）关系？"
+  options:
+    - "在 Order struct 中使用 tag `gorm:\"hasOne\"` 指向 User"
+    - "在 User struct 中使用 `Orders []Order` 字段 + `gorm:\"foreignKey:UserID\"`，在 Order 中定义 UserID 字段"
+    - "在 User 和 Order 中都使用 `gorm:\"manyToMany\"` tag"
+    - "只需在 User 中定义 Orders []Order，不需要任何 tag"
+  answer: 1
+  explanation: "GORM 中一对多关系：在'一'方定义聚合字段（如 Orders []Order），使用 hasMany tag。'多'方需要包含外键字段（如 UserID），通过 foreignKey tag 指定。B 选项正确描述了这个模式。"
+  type: multiple-choice

@@ -1,0 +1,27 @@
+- question: "如何正确创建一个初始容量为 10、长度为 5 的 slice？"
+  options:
+    - "s := make([]int, 5, 10)"
+    - "s := make([]int, 10, 5)"
+    - "s := []int{cap: 10, len: 5}"
+    - "s := new([]int, 5, 10)"
+  answer: 0
+  explanation: "make([]T, length, capacity) 的第二个参数是 length（长度），第三个参数是 capacity（容量）。所以 make([]int, 5, 10) 创建 length=5、cap=10 的 slice。选项B参数顺序反了。选项C的语法不存在，Go 不支持字面量指定长度和容量。new() 返回指针且不用于创建 slice，选项D错误。"
+  type: multiple-choice
+
+- question: "在 Go 中，对一个值为 nil 的 map 直接写入键值对（如 m[key] = value）会发生什么？"
+  options:
+    - "自动初始化 map 并写入数据"
+    - "编译报错，因为 nil map 不能写入"
+    - "运行时 panic（assignment to entry in nil map）"
+    - "默默丢弃写入，不报错也不写入"
+  answer: 2
+  explanation: "对 nil map 写入会触发运行时 panic：'assignment to entry in nil map'。map 的零值确实是 nil，此时只能读取（返回零值）但不能写入。要正常使用 map 需要先用 make 初始化，如 m := make(map[string]int)。选项A错误——Go 不会自动初始化 nil map。"
+  type: multiple-choice
+
+- question: "Go 语言支持隐式类型转换（implicit type conversion），例如可以将 int 自动转换为 float64 而不需要显式转换。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 1
+  explanation: "错误。Go 不支持隐式类型转换，所有类型转换都必须显式进行。例如 var f float64 = float64(i) 才行，直接赋值 var f float64 = i 会编译报错。这是 Go 设计的核心原则之一：显式优于隐式，避免歧义和意外的精度丢失。唯一的例外是无类型常量（untyped constant）可以隐式赋值给兼容类型。"
+  type: true-false

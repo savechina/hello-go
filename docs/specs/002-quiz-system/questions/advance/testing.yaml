@@ -1,0 +1,27 @@
+- question: "go test -run . -bench . 运行表驱动测试和基准测试"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "-run . 匹配所有测试函数（. 是正则通配符），-bench . 匹配所有基准测试函数（以 Benchmark 开头的函数）。两者组合可同时运行单元测试和基准测试。这是 Go 项目 CI/CD 中常见的命令。"
+  type: true-false
+
+- question: "以下哪个是 Go 表驱动测试（table-driven test）的标准模式？"
+  options:
+    - "定义 struct slice 作为测试用例，用 for range 迭代执行每个 case"
+    - "用嵌套 if-else 判断多种输入"
+    - "为每个输入单独写一个 TestXxx 函数"
+    - "用 goto 跳转到不同的测试分支"
+  answer: 0
+  explanation: "表驱动测试：定义包含 test case 的 struct slice（每个 case 包含 input, expected, name 等字段），for _, tc := range tests { t.Run(tc.name, func...) } 执行。这是 Go 社区推荐的测试模式，代码复用性好，易于维护。"
+  type: multiple-choice
+
+- question: "Go 1.18+ 引入的 fuzzing（模糊测试）如何在测试中声明？"
+  options:
+    - "func TestXxxFuzz(f *testing.F) { f.Fuzz(func(t *testing.T, args...) {...}) }"
+    - "func TestXxxFuzz(f *testing.T) { f.Fuzz(func(args...) {...}) }"
+    - "func FuzzXxx(f *testing.F) { f.Add(seed...); f.Fuzz(func(t *testing.T, args...) {...}) }"
+    - "func FuzzXxx(f *testing.T) { f.Fuzz(func(args...) {...}) }"
+  answer: 2
+  explanation: "Go fuzzing 函数必须以 Fuzz 开头（如 FuzzParse），接收 *testing.F。f.Add() 添加 seed corpus，f.Fuzz() 定义模糊测试逻辑。与普通测试不同，fuzz 函数名以 Fuzz 开头而非 Test，且参数是 *testing.F 而非 *testing.T。"
+  type: multiple-choice

@@ -1,0 +1,27 @@
+- question: "Go 标准库中的 `slog` 包是从哪个版本引入的？它的主要特点是什么？"
+  options:
+    - "Go 1.19，支持彩色终端输出"
+    - "Go 1.21，结构化日志（structured logging），支持级别和键值对"
+    - "Go 1.24，基于宏的零开销日志"
+    - "Go 1.18，基于泛型的高性能日志库"
+  answer: 1
+  explanation: "`slog` 在 Go 1.21 正式引入标准库，提供结构化日志能力：支持日志级别（DEBUG/INFO/WARN/ERROR）和键值对参数，可通过 Handler 自定义输出格式（JSON/文本）。"
+  type: multiple-choice
+
+- question: "`slog.Info("user logged in", "user_id", 42, "ip", "10.0.0.1")` 这行代码的含义是什么？"
+  options:
+    - "记录一条 INFO 级别日志，消息为 'user logged in'，附带两个键值对属性"
+    - "记录一条 INFO 级别日志，使用格式化字符串插值"
+    - "记录三条独立日志：用户登录、user_id=42、ip=10.0.0.1"
+    - "创建一个 slog 的 Handler 配置"
+  answer: 0
+  explanation: "`slog.Info` 第一个参数是日志消息（msg），后续参数是交替的键值对（key-value pairs）。这里消息为 'user logged in'，附带 `user_id=42` 和 `ip=10.0.0.1` 两个结构化属性。"
+  type: multiple-choice
+
+- question: "`log.Panic` 函数在记录日志后会调用 `panic()`，导致程序进入恐慌（panic）状态。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。`log.Panic` 先按格式写入日志消息，然后调用 `panic()`，触发 panic 流程（执行已注册的 defer 函数，打印栈轨迹，终止程序）。同理 `log.Fatalf` 先写日志再调用 `os.Exit(1)`。"
+  type: true-false

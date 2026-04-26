@@ -1,0 +1,27 @@
+- question: "关于 Go 接口的实现，以下描述正确的是？"
+  options:
+    - "Go 需要使用 implements 关键字显式声明类型实现了某个接口"
+    - "Go 的接口是隐式实现的：只要类型实现了接口的所有方法，就自动实现该接口"
+    - "Go 的接口需要在编译时通过工具生成实现声明，否则无法使用"
+    - "Go 接口只能通过 struct 类型实现，其他自定义类型无法实现接口"
+  answer: 1
+  explanation: "Go 采用鸭子类型（duck typing）的隐式接口实现方式——一个类型只要实现了接口定义的所有方法签名，就自动被视为实现了该接口，不需要任何显式声明（如 implements 关键字）。这使得接口和类型可以解耦定义，无需相互导入。选项A是 Java/C# 的方式，Go 不需要。选项C和D描述的特性在 Go 中都不存在。"
+  type: multiple-choice
+
+- question: "interface{}（空接口 / empty interface）可以接受哪些类型的值？"
+  options:
+    - "只能接受 nil 值"
+    - "只能接受与之前赋值给它的相同类型的值"
+    - "可以接受任何类型的值，因为所有类型都实现了 0 个方法的接口"
+    - "只能接受数值类型和字符串，不能接受 struct 或 slice"
+  answer: 2
+  explanation: "空接口 interface{} 不包含任何方法，因此 Go 中任何类型都隐式实现了它——因为实现接口只需要满足其方法集，0 个方法的接口无需实现任何方法。这使得 interface{} 可以存储任意类型的值，常用于需要通用容器的场景（如 fmt.Println 的参数）。使用时需要通过类型断言（type assertion）或类型开关（type switch）来取出具体类型。"
+  type: multiple-choice
+
+- question: "Go 语言中，类型实现接口时必须使用 implements 关键字显式声明。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 1
+  explanation: "错误。Go 的接口是隐式实现的，不需要 implements 或其他任何显式声明语法。类型只要方法签名匹配接口定义的所有方法，就自动实现了该接口。这与 Java（implements）或 C# 不同，是 Go 设计的核心特性之一。这也意味着接口的实现关系是由编译器静态检查的，而非运行时声明的。"
+  type: true-false

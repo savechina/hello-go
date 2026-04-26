@@ -1,0 +1,27 @@
+- question: "Go 函数可以返回多个值，以下哪种接收多返回值的方式是正确的？"
+  options:
+    - "result, err := divide(10, 2)，接收端必须全部接收或使用 _ 忽略不需要的值"
+    - "result := divide(10, 2)，自动只取第一个返回值"
+    - "var result = divide(10, 2)，编译器自动选择第一个返回值"
+    - "Go 的函数只能返回一个值，多返回值需要用 struct 包装"
+  answer: 0
+  explanation: "Go 支持多返回值，调用时必须接收所有返回的值。不需要的值可以用空白标识符 _ 忽略，如 result, _ := divide(10, 2)。如果返回值数量不匹配会编译报错，所以选项B和C错误。选项D错误——多返回值是 Go 的一等特性，不需要用 struct 包装。"
+  type: multiple-choice
+
+- question: "Go 中的闭包（closure）捕获外部变量时，以下描述正确的是？"
+  options:
+    - "闭包捕获的是变量的值的副本，外部修改不影响闭包内部"
+    - "闭包捕获的是变量的引用，外部修改会影响闭包内部的值"
+    - "闭包只能捕获函数参数，不能捕获函数体内的局部变量"
+    - "闭包在 Go 中需要通过专门的 closure 关键字来声明"
+  answer: 1
+  explanation: "Go 的闭包捕获的是变量的引用（地址），而不是值的副本。因此外部对变量的修改会影响闭包内部读取到的值。这也是在 for 循环中使用 goroutine 和闭包时常见的陷阱——所有 goroutine 共享同一个循环变量。选项A描述的是值捕获，与 Go 的实际行为相反。选项C和D描述的特性 Go 中都不存在。"
+  type: multiple-choice
+
+- question: "Go 中的函数可以作为另一个函数的返回值，这样可以实现函数式编程中高阶函数（higher-order function）的模式。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。Go 中的函数是一等公民（first-class citizen），可以作为参数传递、作为返回值返回，也可以赋值给变量。这支持了高阶函数的编程模式，例如返回一个闭包来封装状态或行为。标准库中的 sort.Interface、http.HandlerFunc 等都是函数类型使用的典型场景。"
+  type: true-false

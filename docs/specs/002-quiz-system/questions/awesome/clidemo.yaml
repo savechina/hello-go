@@ -1,0 +1,27 @@
+- question: "Cobra 是 Go 生态中最流行的 CLI 框架之一，广泛应用于 kubectl、Hugo 等项目。关于 Cobra 的命令结构，以下哪个描述是正确的？"
+  options:
+    - "Cobra 只支持单层命令结构，无法添加子命令"
+    - "每个命令通过 cobra.Command 定义，RootCommand 负责初始化，子命令通过 AddCommand 注册到父命令"
+    - "Cobra 使用 YAML 配置文件来定义命令结构，不支持代码方式定义"
+    - "Cobra 的路由机制基于正则表达式匹配，不支持子命令层级"
+  answer: 1
+  explanation: "Cobra 基于 cobra.Command 结构体定义命令，通过 RootCommand（根命令）和 AddCommand 构建层级命令树。它支持多级子命令、参数定义（persistent/ local flags）、自动帮助文档生成等功能。选项A错误（支持多级子命令），选项C错误（代码定义），选项D错误（基于命令名匹配而非正则）。"
+  type: multiple-choice
+
+- question: "Cobra 中如何处理命令的输入验证和错误处理？以下说法正确的是？"
+  options:
+    - "Cobra 自动验证所有参数是否为有效类型，无需手动检查"
+    - "使用 PreRunE 或 RunE 钩子函数进行输入验证，RunE 返回 error 时 Cobra 自动打印错误信息并设置退出码"
+    - "错误处理只能通过 manual fmt.Println 输出，Cobra 不提供统一的错误处理机制"
+    - "Cobra 的命令行参数解析在 Run 函数内部进行，PreRun 在参数解析之后执行"
+  answer: 1
+  explanation: "Cobra 提供了 PreRunE、RunE 等钩子函数支持输入验证和错误处理。RunE 返回 error 时，Cobra 自动打印错误信息并退出（exit code 1），避免了手动错误处理的繁琐。PreRunE 在 RunE 之前执行，常用于参数验证。选项A错误（Cobra 不进行自动类型验证，需手动校验），选项C错误（可通过 RunE 统一处理），选项D错误（参数解析在 PreRun 之前完成）。"
+  type: multiple-choice
+
+- question: "Cobra 的 RunE 方法支持返回 error 类型，当 RunE 返回非 nil error 时，Cobra 会自动打印错误信息并设置程序的退出状态码。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。Cobra 的 RunE 字段类型为 func(cmd *cobra.Command, args []string) error，当返回非 nil error 时，Cobra 自动打印错误信息到 stderr 并调用 cmd.Execute 返回该 error（通常导致程序退出码为 1）。这是 Cobra 推荐的错误处理方式，相比 Run（无返回值），RunE 能更好地处理命令行执行错误，是构建健壮 CLI 工具的标准做法。"
+  type: true-false

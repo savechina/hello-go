@@ -1,0 +1,27 @@
+- question: "%w 只能用在 fmt.Errorf 中，不能用在 fmt.Sprintf"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "%w 是 fmt.Errorf 专用的格式化动词，用于包装（wrap）错误，使被包装的错误可通过 errors.Unwrap 恢复。fmt.Sprintf 不支持 %w，编译会报错。只有 fmt.Errorf 能创建可 unwrap 的 error。"
+  type: true-false
+
+- question: "errors.Is 和 errors.As 的区别是什么？"
+  options:
+    - "errors.Is 比较错误值是否相等，errors.As 检查错误链中是否存在特定类型的错误"
+    - "errors.Is 检查错误类型，errors.As 比较错误字符串"
+    - "errors.Is 和 errors.As 功能完全相同"
+    - "errors.Is 用于 unwrap 错误，errors.As 用于 wrap 错误"
+  answer: 0
+  explanation: "errors.Is(err, target) 遍历错误链，检查是否有与 target 相等的错误（使用 ==）。errors.As(err, &target) 遍历错误链，查找第一个可赋值给 target 类型的错误并赋值。Is 用于值比较，As 用于类型断言。"
+  type: multiple-choice
+
+- question: "以下代码的输出是什么？\n\n```go\nvar ErrNotFound = errors.New(\"not found\")\n\nfunc main() {\n    err := fmt.Errorf(\"resource missing: %w\", ErrNotFound)\n    fmt.Println(errors.Is(err, ErrNotFound))\n}\n```"
+  options:
+    - "true"
+    - "false"
+    - "编译错误"
+    - "panic"
+  answer: 0
+  explanation: "%w 将 ErrNotFound 包装进新错误，形成错误链。errors.Is 会遍历整个错误链，找到匹配的 ErrNotFound，返回 true。这是 Go 1.13+ 错误包装和检查的标准用法。"
+  type: multiple-choice

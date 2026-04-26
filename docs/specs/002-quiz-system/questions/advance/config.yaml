@@ -1,0 +1,27 @@
+- question: "配置加载优先级: 默认值 > 配置文件 > 环境变量"
+  options:
+    - "正确"
+    - "错误"
+  answer: 1
+  explanation: "正确的优先级应为：环境变量 > 配置文件 > 默认值（从低到高）。环境变量优先级最高，适合容器化部署和 CI/CD 场景覆盖配置。默认值优先级最低，作为兜底方案。"
+  type: true-false
+
+- question: "使用 Viper 加载配置文件时，以下哪个顺序是正确的？"
+  options:
+    - "viper.SetConfigName() → viper.AddConfigPath() → viper.ReadInConfig() → viper.AutomaticEnv()"
+    - "viper.ReadInConfig() → viper.SetConfigName() → viper.AddConfigPath()"
+    - "viper.AutomaticEnv() → viper.ReadInConfig() → viper.SetConfigName()"
+    - "viper.AddConfigPath() → viper.AutomaticEnv() → viper.ReadInConfig()"
+  answer: 0
+  explanation: "Viper 加载流程：1) SetConfigName 指定文件名（不含扩展名）2) AddConfigPath 指定搜索路径 3) ReadInConfig 读取并解析 4) AutomaticEnv 开启环境变量覆盖。顺序错误可能导致找不到文件或无法正确覆盖。"
+  type: multiple-choice
+
+- question: "Viper 的 BindStruct / Unmarshal 如何实现将配置绑定到 Go struct？"
+  options:
+    - "通过 runtime.Callers 获取调用栈信息"
+    - "通过反射（reflection）遍历 struct 字段，匹配 map key 与 struct tag"
+    - "通过 CGO 调用 C 语言的配置解析函数"
+    - "通过生成代码在编译期完成绑定"
+  answer: 1
+  explanation: "Viper 使用反射机制将解析后的 map[string]interface{} 绑定到 struct。它会遍历 struct 字段，查找 mapstructure tag（或 field name），将对应值转换后设置到 struct 字段中。这是 Go 配置库的通用做法。"
+  type: multiple-choice

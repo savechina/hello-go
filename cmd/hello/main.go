@@ -2,6 +2,10 @@ package main
 
 import (
 	"fmt"
+	"io/fs"
+	"os"
+	"path/filepath"
+	"strings"
 
 	// Register all basic chapters via init()
 	_ "hello/internal/basic/concurrency"
@@ -36,6 +40,7 @@ import (
 	_ "hello/internal/awesome/webservice"
 
 	"hello/internal/chapters"
+	"hello/internal/quiz"
 	"hello/internal/version"
 
 	"github.com/spf13/cobra"
@@ -104,7 +109,11 @@ func newRootCmd() *cobra.Command {
 	rootCmd.SetVersionTemplate("{{printf \"%s\\n\" .Version}}")
 
 	for _, level := range commandLevels {
-		rootCmd.AddCommand(newLevelCmd(level))
+		if level == "quiz" {
+			rootCmd.AddCommand(newQuizCmd())
+		} else {
+			rootCmd.AddCommand(newLevelCmd(level))
+		}
 	}
 
 	configureHelp(rootCmd)
@@ -155,4 +164,96 @@ func dispatchChapter(level string, chapter string) error {
 
 	runner()
 	return nil
+}
+
+func newQuizCmd() *cobra.Command {
+	details := levelDetails["quiz"]
+
+	return &cobra.Command{
+		Use:   "quiz <level> [chapter]",
+		Short: details.Short,
+		Long:  details.Long,
+		Args: func(_ *cobra.Command, args []string) error {
+			if len(args) < 1 || len(args) > 2 {
+				return newCommandError(
+					1,
+					"quiz requires 1 or 2 arguments: <level> [chapter]",
+					"Run 'hello quiz --help' for usage.",
+				)
+			}
+			return nil
+		},
+		RunE: func(_ *cobra.Command, args []string) error {
+			level := args[0]
+			root := findProjectRoot()
+
+			if len(args) == 2 {
+				chapter := args[1]
+				path := filepath.Join(root, "docs", "specs", "002-quiz-system", "questions", level, chapter+".yaml")
+				questions, err := quiz.LoadQuiz(path)
+				if err != nil {
+					return newCommandError(
+						1,
+						fmt.Sprintf("题库尚未完成: %s", chapter),
+						fmt.Sprintf("Run 'hello quiz %s --help' for available chapters.", level),
+					)
+				}
+				if _, err := quiz.RunQuiz(questions, chapter); err != nil {
+					return fmt.Errorf("quiz error: %w", err)
+				}
+				return nil
+			}
+
+			qDir := filepath.Join(root, "docs", "specs", "002-quiz-system", "questions", level)
+			var questionsByChapter map[string][]quiz.Question = make(map[string][]quiz.Question)
+
+			filepath.WalkDir(qDir, func(path string, d fs.DirEntry, err error) error {
+				if err != nil {
+					return nil
+				}
+				if d.IsDir() || !strings.HasSuffix(strings.ToLower(path), ".yaml") {
+					return nil
+				}
+				chapter := strings.TrimSuffix(filepath.Base(path), ".yaml")
+				if questions, err := quiz.LoadQuiz(path); err == nil {
+					questionsByChapter[chapter] = questions
+				}
+				return nil
+			})
+
+			if len(questionsByChapter) == 0 {
+				return newCommandError(1, fmt.Sprintf("没有找到 %s 级别的题目", level), "")
+			}
+
+			if _, err := quiz.RunSummaryMode(questionsByChapter); err != nil {
+				return fmt.Errorf("quiz error: %w", err)
+			}
+			return nil
+		},
+		Annotations: map[string]string{
+			"level": "quiz",
+		},
+	}
+}
+
+// findProjectRoot returns the directory containing go.mod, checking cwd first.
+func findProjectRoot() string {
+	cwd, err := os.Getwd()
+	if err == nil {
+		if _, err := os.Stat(filepath.Join(cwd, "go.mod")); err == nil {
+			return cwd
+		}
+	}
+	dir, _ := os.Getwd()
+	for {
+		if _, err := os.Stat(filepath.Join(dir, "go.mod")); err == nil {
+			return dir
+		}
+		parent := filepath.Dir(dir)
+		if parent == dir {
+			break
+		}
+		dir = parent
+	}
+	return cwd
 }

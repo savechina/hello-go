@@ -1,0 +1,27 @@
+- question: "在 Go 中，`error` 类型的本质是什么？"
+  options:
+    - "它是一个结构体（struct），包含错误码和错误消息字段"
+    - "它是一个接口（interface），仅定义 `Error() string` 方法"
+    - "它是 `string` 类型的别名"
+    - "它是编译器内置的特殊关键字"
+  answer: 1
+  explanation: "`type error interface { Error() string }` 是 Go 标准库预声明的接口。任何实现了 `Error() string` 方法的类型都可以作为 error 使用，标准库的 `errors.New`、`fmt.Errorf` 以及自定义 error 类型均遵循此约定。"
+  type: multiple-choice
+
+- question: "`errors.Is` 和 `errors.As` 的主要区别是什么？"
+  options:
+    - "`errors.Is` 比较 error 值是否相等，`errors.As` 将 error 断言为特定类型"
+    - "`errors.Is` 检查错误链中是否包含目标 error，`errors.As` 查找错误链中第一个匹配的类型"
+    - "`errors.Is` 仅用于 `==` 比较，`errors.As` 用于字符串匹配"
+    - "`errors.Is` 和 `errors.As` 功能完全相同"
+  answer: 1
+  explanation: "`errors.Is(err, target)` 会遍历 error 链（通过 `Unwrap`），检查是否有 error 等于 target；`errors.As(err, &target)` 同样遍历 error 链，尝试将链中的 error 断言为目标类型 `*T`，成功则赋值并返回 true。两者都支持 `fmt.Errorf("...: %w", err)` 包装的 error 链。"
+  type: multiple-choice
+
+- question: "`errors.New(\"msg\")` 每次调用都会返回一个**不同的** error 实例（即使消息相同）。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "正确。`errors.New` 每次调用都创建一个新的 `*errors.errorString` 实例。因此 `errors.New("fail") == errors.New("fail")` 的结果是 `false`。如果需要复用同一个 error 实例，应将其赋值为包级变量。"
+  type: true-false

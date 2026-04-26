@@ -1,0 +1,27 @@
+- question: "sync.RWMutex 允许多个 goroutine 同时读取"
+  options:
+    - "正确"
+    - "错误"
+  answer: 0
+  explanation: "RWMutex（读写锁）允许多个 Read Lock 同时持有（RLock），但写锁（Lock）是独占的，且写锁等待时新的读锁也会被阻塞。这使读多写少的场景性能更好。"
+  type: true-false
+
+- question: "sync.Mutex 的 Zero Value（零值）是什么状态？"
+  options:
+    - "locked（已锁定）"
+    - "unlocked（未锁定）"
+    - "invalid（无效，需要先初始化）"
+    - "取决于操作系统"
+  answer: 1
+  explanation: "sync.Mutex 的零值是 unlocked 状态，可以直接使用，无需显式初始化。这也是为什么 struct 中可以安全地嵌入 sync.Mutex 字段——零值即可用。"
+  type: multiple-choice
+
+- question: "在以下场景中，应该选择 sync/atomic 还是 sync.Mutex？\n\n场景：一个全局计数器需要被多个 goroutine 原子地 +1"
+  options:
+    - "sync.Mutex，因为 mutex 性能更好"
+    - "sync/atomic，因为原子操作的开销比 mutex 低，且语义更精确"
+    - "两者都可以，性能完全一样"
+    - "都不合适，应该用 channel"
+  answer: 1
+  explanation: "对于简单的原子操作（如计数器加减），sync/atomic 比 mutex 更高效。atomic 使用 CPU 级别的原子指令，无需 kernel 调度开销，且 Intent 更明确。mutex 更适合保护复杂临界区。"
+  type: multiple-choice

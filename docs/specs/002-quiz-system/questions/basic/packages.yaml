@@ -1,0 +1,27 @@
+- question: "在 Go 中，一个包（package）内的标识符（函数、变量、常量、类型）要能被其他包导入使用，必须满足什么条件？"
+  options:
+    - "使用 `export` 关键字声明"
+    - "以大写字母开头"
+    - "放在以 `_export` 结尾的文件中"
+    - "在 `init()` 函数中注册到全局命名空间"
+  answer: 1
+  explanation: "Go 采用大小写决定可见性：以大写字母开头的标识符会被导出（exported），可被外部包访问；小写字母开头的标识符仅在包内可见。Go 没有 `export` 关键字。"
+  type: multiple-choice
+
+- question: "关于 Go 包中的 `init()` 函数，以下描述正确的是？"
+  options:
+    - "可以定义带参数和返回值的 init() 函数签名"
+    - "在包被导入时自动执行，无参数、无返回值"
+    - "需要手动在 main() 中调用才会执行"
+    - "一个包只能定义一个 init() 函数"
+  answer: 1
+  explanation: "`init()` 函数在包导入时由 Go 运行时自动调用，无参数、无返回值。一个包中可以在不同文件中定义多个 `init()` 函数，它们按文件名字典序和执行声明顺序执行。"
+  type: multiple-choice
+
+- question: "同一个 Go 包内的多个文件中可以定义同名的函数（函数名完全相同）。"
+  options:
+    - "正确"
+    - "错误"
+  answer: 1
+  explanation: "错误。同一个包（package）在编译后属于同一命名空间，不能定义同名的函数、类型或变量，否则会导致编译错误 `func/method redeclared`。"
+  type: true-false
