@@ -497,4 +497,4 @@ func main() {
 
 ---
 
-[源码](../../internal/basic/datatype/datatype.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/datatype/datatype.go)

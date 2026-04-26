@@ -759,4 +759,4 @@ func AddPoints(userID uint, points int) error {
 
 ## 源码
 
-完整示例代码位于：[internal/advance/database/database.go](../../internal/advance/database/database.go)
+完整示例代码位于：[internal/advance/database/database.go](https://github.com/savechina/hello-go/blob/main/internal/advance/database/database.go)

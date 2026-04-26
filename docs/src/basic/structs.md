@@ -671,4 +671,4 @@ func (o *Order) AddItem(item OrderItem) {
 | Zero Value | 零值 | 类型的默认值（int=0, string=""等） |
 | Factory Function | 工厂函数 | 返回结构体指针的构造函数 |
 
-[源码](../../internal/basic/structs/structs.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/structs/structs.go)

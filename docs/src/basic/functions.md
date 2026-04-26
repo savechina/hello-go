@@ -560,4 +560,4 @@ func main() {
 
 ---
 
-[源码](../../internal/basic/functions/functions.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/functions/functions.go)

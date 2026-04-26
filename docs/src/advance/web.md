@@ -803,4 +803,4 @@ apiRouter.HandleFunc("/users/{id}", getUser)
 
 ## 源码
 
-完整示例代码位于：[internal/advance/web/web.go](../../internal/advance/web/web.go)
+完整示例代码位于：[internal/advance/web/web.go](https://github.com/savechina/hello-go/blob/main/internal/advance/web/web.go)

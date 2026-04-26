@@ -495,7 +495,7 @@ for agg := range output {
 
 ## 源码
 
-完整示例代码位于：[internal/awesome/datapipeline/datapipeline.go](../../internal/awesome/datapipeline/datapipeline.go)
+完整示例代码位于：[internal/awesome/datapipeline/datapipeline.go](https://github.com/savechina/hello-go/blob/main/internal/awesome/datapipeline/datapipeline.go)
 
 运行方式：
 ```bash

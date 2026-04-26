@@ -828,4 +828,4 @@ func processWithRetry(f func() error) error {
 
 ## 源码
 
-完整示例代码位于：[internal/advance/errorhandling/errorhandling.go](../../internal/advance/errorhandling/errorhandling.go)
+完整示例代码位于：[internal/advance/errorhandling/errorhandling.go](https://github.com/savechina/hello-go/blob/main/internal/advance/errorhandling/errorhandling.go)

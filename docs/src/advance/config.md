@@ -764,4 +764,4 @@ func (f *featureFlags) isEnabled(user string) bool {
 
 ## 源码
 
-完整示例代码位于：[internal/advance/config/config.go](../../internal/advance/config/config.go)
+完整示例代码位于：[internal/advance/config/config.go](https://github.com/savechina/hello-go/blob/main/internal/advance/config/config.go)

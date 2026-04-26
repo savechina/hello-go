@@ -726,4 +726,4 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 - [Understanding Go Pointers 教程](https://medium.com/@meeusdylan/understanding-pointers-in-go-6ebc9b9d7a91)
 - [Go 指针最佳实践](https://github.com/golang/go/wiki/CodeReviewComments#pointers)
 
-[源码](../../internal/basic/pointers/pointers.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/pointers/pointers.go)

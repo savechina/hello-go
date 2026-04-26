@@ -584,4 +584,4 @@ func loadConfig(path string) (*ServiceConfig, error) {
 
 ## 源码
 
-完整示例代码位于：[internal/advance/review/review.go](../../internal/advance/review/review.go)
+完整示例代码位于：[internal/advance/review/review.go](https://github.com/savechina/hello-go/blob/main/internal/advance/review/review.go)

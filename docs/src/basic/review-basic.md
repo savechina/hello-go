@@ -57,7 +57,7 @@ func summarizeLearnerProgress(name string, topics []string) string {
 }
 ```
 
-`summaryExample` 把泛型、指针和日志整合到一起，正是阶段复习要达到的效果。[源码](../../internal/basic/review/review.go)
+`summaryExample` 把泛型、指针和日志整合到一起，正是阶段复习要达到的效果。[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/review/review.go)
 
 ## 复习题
 

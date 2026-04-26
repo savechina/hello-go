@@ -644,4 +644,4 @@ slices.Reverse(data)              // 反转切片
 - [`slices` 包文档](https://pkg.go.dev/slices)
 - [`maps` 包文档](https://pkg.go.dev/maps)
 
-[源码](../../internal/basic/generics/generics.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/generics/generics.go)

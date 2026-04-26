@@ -653,4 +653,4 @@ func (p *ConnectionPool) Release(conn *Connection) {
 
 ## 源码
 
-完整示例代码位于：[internal/advance/concurrency_advanced/concurrency_advanced.go](../../internal/advance/concurrency_advanced/concurrency_advanced.go)
+完整示例代码位于：[internal/advance/concurrency_advanced/concurrency_advanced.go](https://github.com/savechina/hello-go/blob/main/internal/advance/concurrency_advanced/concurrency_advanced.go)

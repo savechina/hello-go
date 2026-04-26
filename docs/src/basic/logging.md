@@ -809,4 +809,4 @@ logger.With("user_id", 123).Info("user action")
 - [结构化日志最佳实践](https://www.datadoghq.com/blog/structured-logging-best-practices/)
 - [OpenTelemetry 日志规范](https://opentelemetry.io/docs/specs/otel/logs/)
 
-[源码](../../internal/basic/logging/logging.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/logging/logging.go)

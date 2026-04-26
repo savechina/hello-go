@@ -567,4 +567,4 @@ rows, err := db.QueryContext(ctx, "SELECT * FROM large_table")
 
 ## 源码
 
-完整示例代码位于：[internal/advance/context/context.go](../../internal/advance/context/context.go)
+完整示例代码位于：[internal/advance/context/context.go](https://github.com/savechina/hello-go/blob/main/internal/advance/context/context.go)

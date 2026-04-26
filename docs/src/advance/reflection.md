@@ -502,4 +502,4 @@ func ValidateStruct(input any) error {
 
 ## 源码
 
-完整示例代码位于：[internal/advance/reflection/reflection.go](../../internal/advance/reflection/reflection.go)
+完整示例代码位于：[internal/advance/reflection/reflection.go](https://github.com/savechina/hello-go/blob/main/internal/advance/reflection/reflection.go)

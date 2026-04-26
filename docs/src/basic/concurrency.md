@@ -518,4 +518,4 @@ func fetchURLs(urls []string) []string {
 
 ---
 
-[源码](../../internal/basic/concurrency/concurrency.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/concurrency/concurrency.go)

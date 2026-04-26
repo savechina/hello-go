@@ -604,4 +604,4 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 ## 源码
 
-完整示例代码位于：[internal/advance/smartpointers/smartpointers.go](../../internal/advance/smartpointers/smartpointers.go)
+完整示例代码位于：[internal/advance/smartpointers/smartpointers.go](https://github.com/savechina/hello-go/blob/main/internal/advance/smartpointers/smartpointers.go)

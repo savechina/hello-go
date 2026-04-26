@@ -107,6 +107,11 @@ All user-facing interfaces MUST provide intuitive, consistent, and accessible ex
   - At least 3 knowledge checkpoint questions
   - GitHub links to all source code examples
 
+- **Overview Page Exemption**: Overview pages (`*-overview.md`) are navigation/index pages,
+  not tutorial chapters. They are exempt from the 12-section template requirement and content
+  rules above. Instead, they follow the summary template defined in research.md (Decision 7):
+  概述 → 你会学到什么 → 章节导航 → 学习路径建议 → 下一步.
+
 **UX Principles:**
 - **Discoverability**: Every feature accessible via `--help` or API documentation
 - **Predictability**: Consistent naming, argument order, and output formats

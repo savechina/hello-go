@@ -722,4 +722,4 @@ func validateConfig(cfg Config) error {
 | Context | 上下文 | 错误发生的环境信息 |
 | Unwrap | 展开 | 获取包装的底层错误 |
 
-[源码](../../internal/basic/errorhandling/errorhandling.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/errorhandling/errorhandling.go)

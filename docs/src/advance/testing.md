@@ -769,4 +769,4 @@ func FuzzValidateOrder(f *testing.F) {
 
 ## 源码
 
-完整示例代码位于：[internal/advance/testing/testing.go](../../internal/advance/testing/testing.go)
+完整示例代码位于：[internal/advance/testing/testing.go](https://github.com/savechina/hello-go/blob/main/internal/advance/testing/testing.go)

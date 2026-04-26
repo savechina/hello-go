@@ -414,7 +414,7 @@ if r.ContentLength > 1024*1024 {
 
 ## 源码位置
 
-完整代码位于：[internal/awesome/webservice/webservice.go](../../internal/awesome/webservice/webservice.go)
+完整代码位于：[internal/awesome/webservice/webservice.go](https://github.com/savechina/hello-go/blob/main/internal/awesome/webservice/webservice.go)
 
 运行示例：
 

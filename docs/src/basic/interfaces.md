@@ -664,4 +664,4 @@ func RunPlugin(name string) error {
 | Mock | 模拟 | 测试时替换真实实现 |
 | Dependency Injection | 依赖注入 | 通过构造函数传入依赖 |
 
-[源码](../../internal/basic/interfaces/interfaces.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/interfaces/interfaces.go)

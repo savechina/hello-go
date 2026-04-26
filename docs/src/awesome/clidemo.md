@@ -649,4 +649,4 @@ deploytool status --env all
 
 ## 源码
 
-完整示例代码位于：[internal/awesome/clidemo/clidemo.go](../../internal/awesome/clidemo/clidemo.go)
+完整示例代码位于：[internal/awesome/clidemo/clidemo.go](https://github.com/savechina/hello-go/blob/main/internal/awesome/clidemo/clidemo.go)

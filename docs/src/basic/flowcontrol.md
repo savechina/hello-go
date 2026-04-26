@@ -639,4 +639,4 @@ func (o *Order) Transition(event Event) error {
 | Early Return | 早期返回 | 在函数开头检查条件并提前返回 |
 | Type Switch | 类型开关 | 根据值的类型进行分支判断 |
 
-[源码](../../internal/basic/flowcontrol/flowcontrol.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/flowcontrol/flowcontrol.go)

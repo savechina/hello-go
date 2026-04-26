@@ -706,4 +706,4 @@ func HandleFunc(pattern string, handler func(ResponseWriter, *Request))
 - [Organizing Go Modules 博客](https://go.dev/blog/module-layout)
 - [Go 项目结构标准](https://github.com/golang-standards/project-layout)
 
-[源码](../../internal/basic/packages/packages.go)
+[源码](https://github.com/savechina/hello-go/blob/main/internal/basic/packages/packages.go)
