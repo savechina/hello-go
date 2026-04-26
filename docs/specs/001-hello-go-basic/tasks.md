@@ -24,9 +24,9 @@
 
 **Purpose**: Verify prerequisite — confirm existing chapter content is available for reference
 
-- [ ] T001 Read existing chapter files in `docs/src/basic/` to extract chapter titles and key topics (12 chapters: variables, datatype, functions, flowcontrol, structs, interfaces, errorhandling, concurrency, generics, packages, pointers, logging, review-basic)
-- [ ] T002 Read existing chapter files in `docs/src/advance/` to extract chapter titles and key topics (10 chapters: smartpointers, errorhandling, reflection, database, web, testing, config, concurrency_advanced, context, review-advance)
-- [ ] T003 Read existing chapter files in `docs/src/awesome/` to extract project names and tech stacks (webservice: net/http + JSON, clidemo: Cobra CLI + CRUD)
+- [x] T001 Read existing chapter files in `docs/src/basic/` to extract chapter titles and key topics (12 chapters: variables, datatype, functions, flowcontrol, structs, interfaces, errorhandling, concurrency, generics, packages, pointers, logging, review-basic)
+- [x] T002 Read existing chapter files in `docs/src/advance/` to extract chapter titles and key topics (10 chapters: smartpointers, errorhandling, reflection, database, web, testing, config, concurrency_advanced, context, review-advance)
+- [x] T003 Read existing chapter files in `docs/src/awesome/` to extract project names and tech stacks (webservice: net/http + JSON, clidemo: Cobra CLI + CRUD)
 
 ---
 
@@ -36,10 +36,10 @@
 
 **⚠️ CRITICAL**: Establish baseline before editing
 
-- [ ] T004 Run `cd docs && mdbook build` and confirm zero errors/warnings — record baseline
-- [ ] T005 [P] Read `docs/src/basic/basic-overview.md` — confirm currently single heading only
-- [ ] T006 [P] Read `docs/src/advance/advance-overview.md` — confirm currently single heading only
-- [ ] T007 [P] Read `docs/src/awesome/awesome-overview.md` — confirm currently single heading only
+- [x] T004 Run `cd docs && mdbook build` and confirm zero errors/warnings — record baseline
+- [x] T005 [P] Read `docs/src/basic/basic-overview.md` — confirm currently single heading only
+- [x] T006 [P] Read `docs/src/advance/advance-overview.md` — confirm currently single heading only
+- [x] T007 [P] Read `docs/src/awesome/awesome-overview.md` — confirm currently single heading only
 
 **Checkpoint**: Baseline confirmed. Three overview pages are empty (just `# Title`). mdBook build passes.
 
@@ -53,12 +53,12 @@
 
 ### Implementation for User Story 1
 
-- [ ] T008 [US1] Write `## 概述` section (1-2 paragraphs) in `docs/src/basic/basic-overview.md` — introduce basic section's purpose and scope
-- [ ] T009 [US1] Write `## 你会学到什么` section with 12 specific verifiable learning objectives (e.g., "能用 `var` 或 `:=` 声明变量", "能编写 `for` 循环和 `switch` 分支") — one per sub-chapter
-- [ ] T010 [US1] Write `## 章节导航` section — list all 12 chapters with `./chapter.md` links, 1-2 sentence summary each, and 🔵🟡🔴 difficulty markers: variables(🔵), datatype(🔵), functions(🔵), flowcontrol(🔵), structs(🟡), interfaces(🟡), concurrency(🟡), generics(🟡), packages(🔵), pointers(🟡), logging(🔵), errorhandling(🟡)
-- [ ] T011 [US1] Write `## 学习路径建议` section — total estimated time (~2 hours), learning strategy tips, 🔵🟡🔴 explanation
-- [ ] T012 [US1] Write `## 下一步` section — links to [高级进阶](../advance/advance-overview.md) and [精选实战](../awesome/awesome-overview.md) with brief descriptions of what each offers
-- [ ] T013 [US1] Run `cd docs && mdbook build` and verify zero errors, links valid
+- [x] T008 [US1] Write `## 概述` section (1-2 paragraphs) in `docs/src/basic/basic-overview.md` — introduce basic section's purpose and scope
+- [x] T009 [US1] Write `## 你会学到什么` section with 12 specific verifiable learning objectives (e.g., "能用 `var` 或 `:=` 声明变量", "能编写 `for` 循环和 `switch` 分支") — one per sub-chapter
+- [x] T010 [US1] Write `## 章节导航` section — list all 12 chapters with `./chapter.md` links, 1-2 sentence summary each, and 🔵🟡🔴 difficulty markers: variables(🔵), datatype(🔵), functions(🔵), flowcontrol(🔵), structs(🟡), interfaces(🟡), concurrency(🟡), generics(🟡), packages(🔵), pointers(🟡), logging(🔵), errorhandling(🟡)
+- [x] T011 [US1] Write `## 学习路径建议` section — total estimated time (~2 hours), learning strategy tips, 🔵🟡🔴 explanation
+- [x] T012 [US1] Write `## 下一步` section — links to [高级进阶](../advance/advance-overview.md) and [精选实战](../awesome/awesome-overview.md) with brief descriptions of what each offers
+- [x] T013 [US1] Run `cd docs && mdbook build` and verify zero errors, links valid
 
 **Checkpoint**: `basic-overview.md` ~800 words, all 12 chapters navigable, learning objectives verifiable, next-step links functional. mdBook build passes.
 
@@ -72,13 +72,13 @@
 
 ### Implementation for User Story 2
 
-- [ ] T014 [US2] Write `## 概述` section (1-2 paragraphs) in `docs/src/advance/advance-overview.md` — introduce advance section's purpose
-- [ ] T015 [US2] Write `## 前置知识自检` section — 4 self-check questions using `<details>/<summary>` HTML: Q1 goroutine/channel basics, Q2 interface implicit implementation, Q3 error pattern (`if err != nil`), Q4 struct + method basics
-- [ ] T016 [US2] Write `## 你会学到什么` section with 8+ specific verifiable learning objectives — one per sub-chapter (context, advanced concurrency, generics, reflection, performance, database, web, testing, config, smartpointers)
-- [ ] T017 [US2] Write `## 章节导航` section — list all 8+ chapters with `./chapter.md` links, 1-2 sentence summaries, and 🔵🟡🔴 difficulty markers: database(🟡), web(🟡), errorhandling(🟡), context(🔴), concurrency_advanced(🔴), reflection(🟡), testing(🟡), config(🔵), smartpointers(🟡)
-- [ ] T018 [US2] Write `## 学习路径建议` section — total estimated time (~3 hours), learning strategy, which chapters to prioritize based on goals
-- [ ] T019 [US2] Write `## 下一步` section — link to [精选实战](../awesome/awesome-overview.md) with description of what awesome projects apply advance concepts
-- [ ] T020 [US2] Run `cd docs && mdbook build` and verify zero errors, `<details>` tags render correctly
+- [x] T014 [US2] Write `## 概述` section (1-2 paragraphs) in `docs/src/advance/advance-overview.md` — introduce advance section's purpose
+- [x] T015 [US2] Write `## 前置知识自检` section — 4 self-check questions using `<details>/<summary>` HTML: Q1 goroutine/channel basics, Q2 interface implicit implementation, Q3 error pattern (`if err != nil`), Q4 struct + method basics
+- [x] T016 [US2] Write `## 你会学到什么` section with 8+ specific verifiable learning objectives — one per sub-chapter (context, advanced concurrency, generics, reflection, performance, database, web, testing, config, smartpointers)
+- [x] T017 [US2] Write `## 章节导航` section — list all 8+ chapters with `./chapter.md` links, 1-2 sentence summaries, and 🔵🟡🔴 difficulty markers: database(🟡), web(🟡), errorhandling(🟡), context(🔴), concurrency_advanced(🔴), reflection(🟡), testing(🟡), config(🔵), smartpointers(🟡)
+- [x] T018 [US2] Write `## 学习路径建议` section — total estimated time (~3 hours), learning strategy, which chapters to prioritize based on goals
+- [x] T019 [US2] Write `## 下一步` section — link to [精选实战](../awesome/awesome-overview.md) with description of what awesome projects apply advance concepts
+- [x] T020 [US2] Run `cd docs && mdbook build` and verify zero errors, `<details>` tags render correctly
 
 **Checkpoint**: `advance-overview.md` ~800 words, self-check quiz functional, learning objectives verifiable, mdBook build passes.
 
@@ -92,15 +92,15 @@
 
 ### Implementation for User Story 3
 
-- [ ] T021 [US3] Write `## 概述` section (1-2 paragraphs) in `docs/src/awesome/awesome-overview.md` — introduce awesome section's purpose, who it's for
-- [ ] T022 [US3] Write `## 实战项目` section — list 4 projects with:
+- [x] T021 [US3] Write `## 概述` section (1-2 paragraphs) in `docs/src/awesome/awesome-overview.md` — introduce awesome section's purpose, who it's for
+- [x] T022 [US3] Write `## 实战项目` section — list 4 projects with:
   1. **Web 服务** — 🔧 net/http + JSON 中间件，适合练习 REST API 设计与并发处理
   2. **CLI 工具** — 🔧 Cobra + CRUD 操作，适合练习命令行架构与子命令路由
   3. **数据处理管道** — 🔧 goroutine pool + channel pipeline，适合练习并发模式与优雅关闭
   4. **工具链实践** — 🔧 Go 工具链深度使用，适合理解编译/测试/基准测试流程
-- [ ] T023 [US3] Write `## 应用场景建议` section — mapping of project types to real-world use cases (microservices, devops tools, data processing)
-- [ ] T024 [US3] Write `## 前置要求` section — what knowledge is needed (basic + advance completion recommended)
-- [ ] T025 [US3] Run `cd docs && mdbook build` and verify zero errors, all cross-links valid
+- [x] T023 [US3] Write `## 应用场景建议` section — mapping of project types to real-world use cases (microservices, devops tools, data processing)
+- [x] T024 [US3] Write `## 前置要求` section — what knowledge is needed (basic + advance completion recommended)
+- [x] T025 [US3] Run `cd docs && mdbook build` and verify zero errors, all cross-links valid
 
 **Checkpoint**: `awesome-overview.md` ~600 words, 4 projects listed with tech stacks and audience guidance, mdBook build passes.
 
@@ -110,11 +110,11 @@
 
 **Purpose**: Final validation across all three overview pages
 
-- [ ] T026 Run `cd docs && mdbook build` full build and verify zero errors, zero warnings, zero 404 links
-- [ ] T027 [P] Verify all three overview pages have correct cross-links between them (basic→advance, basic→awesome, advance→awesome)
-- [ ] T028 [P] Verify word counts: basic ~800 (±20%), advance ~800 (±20%), awesome ~600 (±20%)
-- [ ] T029 [P] Run `mdbook serve docs/` locally and visually verify rendering (spacing, heading hierarchy, table rendering, details elements)
-- [ ] T030 Verify SUMMARY.md navigation still correct and overview pages appear as expected in sidebar
+- [x] T026 Run `cd docs && mdbook build` full build and verify zero errors, zero warnings, zero 404 links
+- [x] T027 [P] Verify all three overview pages have correct cross-links between them (basic→advance, basic→awesome, advance→awesome)
+- [x] T028 [P] Verify word counts: basic ~800 (±20%), advance ~800 (±20%), awesome ~600 (±20%)
+- [x] T029 [P] Run `mdbook serve docs/` locally and visually verify rendering (spacing, heading hierarchy, table rendering, details elements)
+- [x] T030 Verify SUMMARY.md navigation still correct and overview pages appear as expected in sidebar
 
 ---
 
