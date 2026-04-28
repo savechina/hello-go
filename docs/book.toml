@@ -4,6 +4,19 @@ language = "en"
 src = "src"
 title = "Hello Go"
 
+
+[preprocessor.admonish]
+# command = "mdbook-admonish"
+assets_version = "3.1.0" # do not edit: managed by `mdbook-admonish install`
+
+[preprocessor.alerts]
+# command = "mdbook-alerts"
+
+[preprocessor.pagetoc]
+
 [output.html]
 git-repository-url = "https://github.com/savechina/hello-go"
 git-repository-icon = "fa-github"
+
+additional-css = ["./assets/css/mdbook-admonish.css", "./theme/pagetoc.css"]
+additional-js = ["./theme/pagetoc.js"]
