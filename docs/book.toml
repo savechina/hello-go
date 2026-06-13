@@ -19,4 +19,4 @@ git-repository-url = "https://github.com/savechina/hello-go"
 git-repository-icon = "fa-github"
 
 additional-css = ["./assets/css/mdbook-admonish.css", "./theme/pagetoc.css"]
-additional-js = ["./theme/pagetoc.js"]
+additional-js = ["./theme/pagetoc.js","./assets/js/ga.js"]
