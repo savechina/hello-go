@@ -1,0 +1,62 @@
+<!-- SEO: Meta Description -->
+<meta name="description" content="{{#if description}}{{description}}{{else}}Hello Go - 完整的 Go 编程教程，涵盖基础语法、并发编程、Web 开发、数据库、微服务等章节。{{/if}}">
+
+<!-- SEO: Canonical URL -->
+{{#if path}}
+<link rel="canonical" href="https://renyan.org/hello/go/{{path}}">
+{{else}}
+<link rel="canonical" href="https://renyan.org/hello/go/">
+{{/if}}
+
+<!-- SEO: Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://renyan.org/hello/go/{{#if path}}{{path}}{{/if}}">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{#if description}}{{description}}{{else}}Hello Go - 完整的 Go 编程教程，涵盖基础语法、并发编程、Web 开发、数据库、微服务等章节。{{/if}}">
+<meta property="og:image" content="https://renyan.org/hello/go/images/og-cover.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hello Go Tutorial">
+
+<!-- SEO: Additional Meta Tags -->
+<meta name="keywords" content="Go, Go教程, Go编程, Go学习, Go入门, Go并发, Go Web, Go数据库, Go微服务, Go教程中文版">
+<meta name="author" content="RenYan Wei">
+<meta name="theme-color" content="#ffffff">
+
+<!-- SEO: JSON-LD Structured Data (LearningResource) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Hello Go - Go 编程从入门到实战教程",
+  "description": "Hello Go 是一套完整的 Go 编程教程，涵盖基础语法、并发编程、Web 开发、数据库、微服务等章节。",
+  "url": "https://renyan.org/hello/go/",
+  "inLanguage": "en",
+  "license": "https://opensource.org/licenses/MIT",
+  "creator": {
+    "@type": "Person",
+    "name": "RenYan Wei"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hello Go",
+    "url": "https://renyan.org/hello/go/"
+  },
+  "educationalLevel": "Beginner to Advanced",
+  "teaches": ["Go 编程", "并发编程", "Web 开发", "数据库", "微服务"],
+  "codeRepository": "https://github.com/savechina/hello-go",
+  "about": {
+    "@type": "Thing",
+    "name": "Go Programming Language"
+  }
+}
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JBDQHSMGWL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JBDQHSMGWL');
+</script>

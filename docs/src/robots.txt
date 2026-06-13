@@ -1,0 +1,11 @@
+# robots.txt for Hello Go Tutorial
+# https://renyan.org/hello/go/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://renyan.org/hello/go/sitemap.xml
+
+# Disallow print version to reduce crawl waste
+Disallow: /print.html
